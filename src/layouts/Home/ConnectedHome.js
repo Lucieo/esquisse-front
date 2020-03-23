@@ -19,9 +19,9 @@ function ConnectedHome(){
                 </i>
             </Link>
             <p>Profil</p>
-            <button className="btn">
+            <Link to="/profil" className="btn">
                 Modifier Mon profil
-            </button>
+            </Link>
         </div>
     )
 }

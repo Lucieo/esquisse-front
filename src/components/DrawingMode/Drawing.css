@@ -1,0 +1,32 @@
+.drawing-mode__canvas{
+    margin: 0 auto;
+}
+.drawing-mode__countdown{
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0px 0px 10px 0px
+}
+
+.drawing-mode__countdown .material-icons{
+    margin-right: 15px;
+}
+
+
+.drawing-controls{
+    display: flex;
+    justify-content: space-between;
+    padding:10px
+}
+
+.drawing-tools .icon{
+    margin: 10px;
+}
+
+.drawing-tools .circle-picker{
+    margin: 0 auto!important;
+}
+
+.drawing-tools .brush-size{
+    min-width: 20px;
+    display: inline-block;
+}

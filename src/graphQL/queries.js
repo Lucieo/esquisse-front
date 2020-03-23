@@ -5,6 +5,8 @@ export const CURRENT_USER = gql`
     currentUser {
         name
         email
+        icon
+        iconColor
     }
   }
 `;

@@ -3,7 +3,7 @@ import Header from './layouts/Header/Header';
 import Login from './layouts/Login/Login';
 import Singup from './layouts/Signup/Signup';
 import Home from './layouts/Home/Home';
-import Dashboard from './layouts/Dashboard';
+import Profil from './layouts/Profil/Profil';
 import Gameboard from './layouts/GameBoard/GameBoard';
 import {
   Switch,
@@ -19,8 +19,8 @@ const App = (props) =>{
                 <Route path="/" exact>
                   <Home/>
                 </Route>
-                <Route path="/dashboard" exact>
-                  <Dashboard/>
+                <Route path="/profil" exact>
+                  <Profil/>
                 </Route>
                 <Route path="/login">
                   <Login />

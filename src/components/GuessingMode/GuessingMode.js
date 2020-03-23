@@ -6,7 +6,7 @@ export default function GuessingPanel(props){
 
         return(
             <>
-                <p>Le dessin</p>
+                <p>LE DESSIN A INTERPRETER</p>
                 <CanvasDraw
                 disabled
                 hideGrid
@@ -17,7 +17,7 @@ export default function GuessingPanel(props){
                 <p>Le mot :</p>
                 <form>
                     <input
-                        placeholder="Votre interprétation"
+                        placeholder="Je vois je vois..."
                     />
                     <button className="btn">Envoyer</button>
                 </form>
