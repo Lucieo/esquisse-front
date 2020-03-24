@@ -8,7 +8,7 @@ export default function Home(){
     const { data } = useQuery(IS_LOGGED_IN);
     return(
         <div>
-            <h3>Esquisse Live</h3>
+            <i>{data.icon}</i>
             {
                data.isLoggedIn 
                ? <ConnectedHome/>

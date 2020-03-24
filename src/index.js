@@ -13,7 +13,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
-  headers: { authorization: localStorage.getItem('token') },
+  headers: { authorization: localStorage.getItem('esquisse-token') },
   uri: 'http://localhost:4000/graphql'
 });
 
@@ -27,7 +27,7 @@ const client = new ApolloClient({
 
 cache.writeData({
   data: {
-    isLoggedIn: !!localStorage.getItem('token'),
+    isLoggedIn: !!localStorage.getItem('esquisse-token'),
   },
 });
 

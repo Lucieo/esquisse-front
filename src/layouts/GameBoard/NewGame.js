@@ -1,6 +1,8 @@
 import React from 'react';
 import PlayerItem from '../../components/PlayerItem';
-import AdminGameControls from '../../components/AdminGameControls'
+import AdminGameControls from '../../components/AdminGameControls';
+import {JOIN_GAME} from '../../graphQL/mutations';
+import {useMutation } from "@apollo/react-hooks";
 
 
 const NewGame = ({players, isGameAdmin=true})=>{
@@ -13,10 +15,10 @@ const NewGame = ({players, isGameAdmin=true})=>{
             }
             <div>
                 <p>Liste des joueurs connectés à cette partie</p>
-                <ul class="collection">
+                <ul className="collection">
                     {
-                     players.map(player=>
-                        <PlayerItem player={player}/>)   
+                     players.map((player, index)=>
+                        <PlayerItem key={index} player={player}/>)   
                     }
                 </ul>
             </div>

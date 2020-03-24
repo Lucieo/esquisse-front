@@ -4,7 +4,7 @@ import Login from './layouts/Login/Login';
 import Singup from './layouts/Signup/Signup';
 import Home from './layouts/Home/Home';
 import Profil from './layouts/Profil/Profil';
-import Gameboard from './layouts/GameBoard/GameBoard';
+import Gameboard from './layouts/GameBoard';
 import {
   Switch,
   Route,
@@ -14,7 +14,7 @@ const App = (props) =>{
     return(
         <>
             <Header/>
-            <div className="container">
+            <div>
               <Switch>
                 <Route path="/" exact>
                   <Home/>
@@ -28,7 +28,7 @@ const App = (props) =>{
                 <Route path="/signup">
                   <Singup />
                 </Route>
-                <Route path="/gameboard">
+                <Route path="/gameboard/:gameId">
                   <Gameboard />
                 </Route>
               </Switch>

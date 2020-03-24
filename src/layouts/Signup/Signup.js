@@ -3,8 +3,9 @@ import { useApolloClient, useMutation } from "@apollo/react-hooks";
 import {SIGNUP_USER} from '../../graphQL/mutations';
 import { useHistory } from "react-router-dom";
 import {isEmail, isLength} from 'validator';
+import './Signup.css';
 
-export default function SignUp(){
+export default function SignUp(props){
     const client = useApolloClient();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,29 +19,33 @@ export default function SignUp(){
         }
     });
 
-    const checkForm = ()=>{
+    const checkForm = (newValue, valueName, setter)=>{
+        setter(newValue);
         let valid = true;
         let errors = '';
-        (!email || !password || !name) && (valid = false);
-        if(email && !isEmail(email)){
+
+        if(valueName==="email" && !isEmail(newValue)){
             valid = false;
             errors="Votre email n'est invalide."
         }
-        else if(password && !isLength(password, {min:6})){
+        else if(valueName==="password" && !isLength(newValue, {min:6})){
             valid = false;
             errors="Choisissez un mot de passe de 6 charactères minimum."
         }
-        else if(name && !isLength(name, {min:6})){
+        else if(valueName==="name" && !isLength(newValue, {min:6})){
             valid = false;
             errors="Choisissez un nom de 6 charactères minimum."
         }
+
+        (!email || !password || !name) && (valid = false);
+
         setSignupErrors(errors);
         setFormValid(valid);
     }
 
     return(
         <div className="container">
-            <h3>Inscription</h3>
+            <p>se créer un compte</p>
             <p className="red-text" style={{minHeight:25}}>{signupErrors}</p>
             <form 
                 onSubmit={(e)=>{
@@ -50,25 +55,26 @@ export default function SignUp(){
             <input
                 placeholder="nom"
                 value={name}
-                onChange={(e)=>{setName(e.target.value); checkForm()}}
+                onChange={(e)=>{checkForm(e.target.value, 'name', setName)}}
             />
             <input
                 placeholder="email"
                 type="email"
                 value={email}
-                onChange={(e)=>{setEmail(e.target.value); checkForm()}}
+                onChange={(e)=>{checkForm(e.target.value, 'email', setEmail)}}
             />
             <input
                 type="password"
                 placeholder="mot de passe"
                 value={password}
-                onChange={(e)=>{setPassword(e.target.value); checkForm()}}
+                onChange={(e)=>{checkForm(e.target.value, 'password', setPassword)}}
             />
 
-            <button className={`btn ${!isFormValid && 'disabled'}`}>
+            <button className={`btn ${!isFormValid && 'disabled'} signup__validate`}>
                 Valider
                 <i className="material-icons left">check</i>
             </button>
+            <p className="signup__switch" onClick={()=>props.switchMode()}>Déjà un compte? Se connecter</p>
 
         </form>
         </div>

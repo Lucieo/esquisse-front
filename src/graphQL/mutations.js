@@ -30,3 +30,19 @@ mutation ModifyUser($icon: String!, $name: String!, $iconColor: String!){
     }
 }
 `;
+
+export const CREATE_GAME = gql`
+mutation{
+    createGame{
+        gameboardId
+    }
+  }
+`;
+
+export const JOIN_GAME = gql`
+mutation{
+    joinGame{
+        id
+    }
+  }
+`;

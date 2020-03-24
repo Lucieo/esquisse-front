@@ -6,18 +6,19 @@ import {MODIFY_USER} from '../../graphQL/mutations';
 import IconSelector from '../../components/ProfileItems/IconSelector';
 import { CirclePicker } from 'react-color';
 import './Profil.css';
+import { useHistory } from "react-router-dom";
 
 
 const Profil = ()=>{
     const [icon, setIcon] = useState('tag_faces');
     const [iconColor, setIconColor] = useState('black-text');
     const [name, setName] = useState('');
+    let history = useHistory();
 
     const { data, loading, error } = useQuery(
         CURRENT_USER,
         { fetchPolicy: "network-only", 
             onCompleted(data) {
-                console.log(data)
                 setName(data.currentUser.name)
                 setIcon(data.currentUser.icon || 'tag_faces')
                 setIconColor(data.currentUser.iconColor || 'blue-text')            }
@@ -25,7 +26,10 @@ const Profil = ()=>{
     );
 
     const [modifyUser , {modifyData}] = useMutation(MODIFY_USER, {
-        variables: {name, icon, iconColor}
+        variables: {name, icon, iconColor},
+        onCompleted(response){
+            history.push('/')
+        }
     })
 
     
@@ -45,6 +49,7 @@ const Profil = ()=>{
                         placeholder="nom"
                         value={name}
                         onChange={(e)=>setName(e.target.value)}
+                        maxLength={20}
                     />
                 </div>
                 <div>
