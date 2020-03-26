@@ -34,14 +34,14 @@ mutation ModifyUser($icon: String!, $name: String!, $iconColor: String!){
 export const CREATE_GAME = gql`
 mutation{
     createGame{
-        gameboardId
+        gameId
     }
   }
 `;
 
 export const JOIN_GAME = gql`
-mutation{
-    joinGame{
+mutation JoinGame($gameId: ID!){
+    joinGame(gameId: $gameId){
         id
     }
   }

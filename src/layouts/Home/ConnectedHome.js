@@ -5,8 +5,10 @@ import {CREATE_GAME} from '../../graphQL/mutations';
 import {Link} from 'react-router-dom';
 import './Home.css';
 import { useHistory } from "react-router-dom";
+import requireAuth from "../../components/requireAuth";
 
 function ConnectedHome(){
+    console.log(localStorage.getItem('esquisse-token'))
     const history = useHistory();
     const { data, loading, error } = useQuery(
         CURRENT_USER,
@@ -17,17 +19,18 @@ function ConnectedHome(){
         CREATE_GAME,
         {
             onCompleted({createGame}){
-                history.push(`/gameboard/${createGame.gameboardId}`)
+                history.push(`/game/${createGame.gameId}`)
             }
         }
     )
 
     if(loading) return <></>
+    const user = data && data.currentUser
     return(
         <div className="center connected-home">
-            <i className="material-icons large connected-home__icon" style={{color: data.currentUser.iconColor}}>{data.currentUser.icon}</i>
+            <i className="material-icons large connected-home__icon" style={{color: user? user.iconColor : "black"}}>{user? user.icon : "tag_faces"}</i>
             <p>Bienvenue</p>
-            <h4>{data.currentUser.name}</h4>
+            <h4>{user? user.name : "John Doe"}</h4>
             <p>Profil</p>
             <Link to="/profil" className="btn">
                 Modifier Mon profil
@@ -42,4 +45,4 @@ function ConnectedHome(){
     )
 }
 
-export default ConnectedHome;
+export default requireAuth(ConnectedHome);

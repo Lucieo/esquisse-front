@@ -7,15 +7,18 @@ const requireAuth = (WrappedComponent) => {
     const HOC = (props)=>{
         const { data } = useQuery(IS_LOGGED_IN);
         let history = useHistory();
-        useEffect(() => {
-            console.log(data)
-           !data.isLoggedIn && history.push('/login')
-        });
-        return (
-        <WrappedComponent
-            {...props}
-        />
-        );
+
+        if(data.isLoggedIn){
+            return (
+                <WrappedComponent
+                    {...props}
+                />
+                );
+        }
+        else{
+            history.push('/');
+            return <></>
+        }
     }
     return HOC;
 };

@@ -4,7 +4,7 @@ import Login from './layouts/Login/Login';
 import Singup from './layouts/Signup/Signup';
 import Home from './layouts/Home/Home';
 import Profil from './layouts/Profil/Profil';
-import Gameboard from './layouts/GameBoard';
+import Game from './layouts/Game';
 import {
   Switch,
   Route,
@@ -28,8 +28,8 @@ const App = (props) =>{
                 <Route path="/signup">
                   <Singup />
                 </Route>
-                <Route path="/gameboard/:gameId">
-                  <Gameboard />
+                <Route path="/game/:gameId">
+                  <Game />
                 </Route>
               </Switch>
             </div>

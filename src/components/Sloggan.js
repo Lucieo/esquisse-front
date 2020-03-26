@@ -15,8 +15,8 @@ export default function Sloggan(){
             <span style={styles.orange}>e</span>
             <span style={styles.yellow}>y</span>
             &nbsp;
-            <span style={styles.green}>H</span>
-            <span style={styles.blue}>o</span>
+            <span style={styles.green}>O</span>
+            <span style={styles.blue}>h</span>
             &nbsp;
             <span style={styles.red}>L</span>
             <span style={styles.orange}>e</span>

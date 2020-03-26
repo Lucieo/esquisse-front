@@ -21,6 +21,7 @@ export default function Login(props){
                 userEmail: login.user.email,
                 userName: login.user.name
             } });
+            window.location.reload();
             history.push('/');
         },
         onError(...error) {
