@@ -3,7 +3,6 @@ import CanvasDraw from "react-canvas-draw";
 import DrawingTools from './DrawingTools';
 import DrawingControls from './DrawingControls';
 import './Drawing.css';
-import Countdown from 'react-countdown';
 
 
 export default function DrawingPanel(props){
@@ -26,10 +25,6 @@ export default function DrawingPanel(props){
                 <DrawingControls
                     saveableCanvas={saveableCanvas}
                 />
-                <div className="drawing-mode__countdown">
-                    <i className="material-icons">access_alarm</i>
-                    <Countdown date={Date.now() + 100000} />
-                </div>
                 <CanvasDraw
                     ref={canvasDraw => setSaveableCanvas(canvasDraw)}
                     brushRadius= {brushRadius}

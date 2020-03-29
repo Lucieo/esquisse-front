@@ -6,7 +6,7 @@ const LAUNCH_GAME = gql`
 mutation ChangeGameStatus($newStatus:String!, $gameId: ID!){
     changeGameStatus(gameId:$gameId, newStatus:$newStatus){
       status
-      gameId
+      id
     }
   }
 `;

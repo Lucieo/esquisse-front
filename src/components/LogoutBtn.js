@@ -8,9 +8,10 @@ export default function LogoutButton() {
   return (
     <li
       onClick={() => {
-        client.writeData({ data: { isLoggedIn: false } });
+        client.writeData({ data: { isLoggedIn: false, userId: null } });
         localStorage.clear();
-        history.push('/')
+        window.location.reload();
+        history.push('/');
       }}
     >
         <a>

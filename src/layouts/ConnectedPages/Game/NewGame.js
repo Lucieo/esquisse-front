@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import PlayerItem from '../../components/PlayerItem';
-import AdminGameControls from '../../components/AdminGameControls';
-import {JOIN_GAME} from '../../graphQL/mutations';
+import PlayerItem from 'components/PlayerItem';
+import AdminGameControls from 'components/AdminGameControls';
+import {JOIN_GAME} from 'graphQL/mutations';
 import {useMutation, useSubscription } from "@apollo/react-hooks";
 import gql from 'graphql-tag';
 

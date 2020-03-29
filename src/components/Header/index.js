@@ -1,14 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {useQuery} from "@apollo/react-hooks";
-import {IS_LOGGED_IN} from '../../graphQL/localQueries';
 import LogoutButton from '../../components/LogoutBtn';
 import './Header.css';
+import requireAuth from 'components/requireAuth';
 
-export default function Header(){
-    const { data } = useQuery(IS_LOGGED_IN);
 
-    if(data.isLoggedIn){
+
+export default requireAuth(function Header(){
         return(
             <nav>
             <div className="nav-wrapper">
@@ -22,9 +20,7 @@ export default function Header(){
             </div>
         </nav>
         )   
-    }
-    return(
-        <div className="header__notConnected"></div>
-    )
-}
+})
+
+
 

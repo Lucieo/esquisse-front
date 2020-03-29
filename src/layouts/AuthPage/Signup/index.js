@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useApolloClient, useMutation } from "@apollo/react-hooks";
-import {SIGNUP_USER} from '../../graphQL/mutations';
+import {SIGNUP_USER} from '../../../graphQL/mutations';
 import { useHistory } from "react-router-dom";
 import {isEmail, isLength} from 'validator';
 import './Signup.css';

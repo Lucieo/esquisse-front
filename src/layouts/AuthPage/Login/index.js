@@ -1,28 +1,35 @@
 import React, {useState} from 'react';
-import { useApolloClient, useMutation } from "@apollo/react-hooks";
-import {LOGIN_USER} from '../../graphQL/mutations';
-import { useHistory } from "react-router-dom";
+import {useMutation, useApolloClient } from "@apollo/react-hooks";
 import {isEmail} from 'validator';
+import gql from 'graphql-tag';
 import './Login.css';
 
+
+const LOGIN_USER = gql`
+mutation Login($email: String!, $password: String!){
+    login(email: $email, password: $password){
+        token
+        user{
+            email
+            name
+            id
+        }
+    }
+}
+`;
+
 export default function Login(props){
-    const client = useApolloClient();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginErrors, setLoginErrors] = useState('')
     const [isFormValid, setFormValid] = useState(false);
-    let history = useHistory();
-    
+
+    const client = useApolloClient();
     const [loginUser, { loading, error }] = useMutation(LOGIN_USER, {
         onCompleted({login}) {
             localStorage.setItem("esquisse-token", "Bearer "+login.token);
-            client.writeData({ data: { 
-                isLoggedIn: true,
-                userEmail: login.user.email,
-                userName: login.user.name
-            } });
+            client.writeData({ data: { isLoggedIn: true } });
             window.location.reload();
-            history.push('/');
         },
         onError(...error) {
             const currentError = error[0].toString();

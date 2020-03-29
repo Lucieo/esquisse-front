@@ -7,11 +7,6 @@
     padding: 0px 0px 10px 0px
 }
 
-.drawing-mode__countdown .material-icons{
-    margin-right: 15px;
-}
-
-
 .drawing-controls{
     display: flex;
     justify-content: space-between;

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useQuery} from "@apollo/react-hooks";
-import {IS_LOGGED_IN} from '../graphQL/localQueries';
+import {IS_LOGGED_IN} from '../graphQL/localState';
 import { useHistory } from "react-router-dom";
 
 const requireAuth = (WrappedComponent) => {

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import requireAuth from '../../components/requireAuth';
+import requireAuth from '../../../components/requireAuth';
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import {CURRENT_USER} from '../../graphQL/queries';
-import {MODIFY_USER} from '../../graphQL/mutations';
-import IconSelector from '../../components/ProfileItems/IconSelector';
+import {CURRENT_USER} from '../../../graphQL/queries';
+import {MODIFY_USER} from '../../../graphQL/mutations';
+import IconSelector from '../../../components/ProfileItems/IconSelector';
 import { CirclePicker } from 'react-color';
 import './Profil.css';
 import { useHistory } from "react-router-dom";
@@ -21,7 +21,8 @@ const Profil = ()=>{
             onCompleted(data) {
                 setName(data.currentUser.name)
                 setIcon(data.currentUser.icon || 'tag_faces')
-                setIconColor(data.currentUser.iconColor || 'blue-text')            }
+                setIconColor(data.currentUser.iconColor || 'blue-text')            
+            }
         }
     );
 
@@ -29,7 +30,10 @@ const Profil = ()=>{
         variables: {name, icon, iconColor},
         onCompleted(response){
             history.push('/')
-        }
+        },
+        refetchQueries: [{
+            query: CURRENT_USER
+        }]
     })
 
     
