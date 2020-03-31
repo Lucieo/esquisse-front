@@ -1,17 +1,17 @@
 import React from 'react';
 import './Drawing.css';
 
-export default function DrawingControls(props){
+export default function DrawingControls({content}){
     return(
-        <div className="drawing-controls">
+        <div className="drawing-controls center">
             <div
                 className="waves-effect waves-light btn red"
-                onClick={() => {props.saveableCanvas.clear();}}
+                onClick={() => {content.clear();}}
             >
                 <i className="material-icons left">delete_forever</i>
                 Effacer
             </div>
-            <div className="waves-effect waves-light btn"
+            {/* <div className="waves-effect waves-light btn"
                 onClick={() => {
                     localStorage.setItem(
                     "savedDrawing",
@@ -21,7 +21,7 @@ export default function DrawingControls(props){
             >
                     <i className="material-icons left">send</i>
                     Envoyer
-            </div>
+            </div> */}
 
         </div>
     )

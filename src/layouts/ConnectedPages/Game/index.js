@@ -85,8 +85,14 @@ const Game = (props)=>{
         let sketchbookId=""
         if(gameInfo.players){
             const playersIds = gameInfo.players.map(player=>player.id)
-            const userIndex = playersIds.indexOf(userId)
-            const newIndex = (userIndex+gameInfo.turn>gameInfo.sketchbooks.length-1) ? gameInfo.turn : userIndex+gameInfo.turn
+            const nextIndex = playersIds.indexOf(userId)+gameInfo.turn
+            console.log("nextIndex", nextIndex)
+
+            const sketchbooksMaxIndexes = gameInfo.sketchbooks.length-1;
+            console.log(sketchbooksMaxIndexes, "sketchbooksMaxIndexes")
+            console.log("nextIndex>sketchbooksMaxIndexes ", nextIndex>sketchbooksMaxIndexes)
+            const newIndex = (nextIndex>sketchbooksMaxIndexes) ? (nextIndex-sketchbooksMaxIndexes-1) : nextIndex
+
             sketchbookId = gameInfo.sketchbooks[newIndex]
             console.log("GAME-INDEX-GETSKETCHBOOKID CHOSEN", "index ", newIndex, "sketchbookid ", sketchbookId)
         }
@@ -109,7 +115,10 @@ const Game = (props)=>{
             />
         }
         else if(status==="over"){
-            return <GameOver/>
+            return <GameOver
+            gameId={gameId} 
+            sketchbooks={gameInfo.sketchbooks}
+            />
         }
     }
 

@@ -1,0 +1,5 @@
+.guessing-mode__canvas{
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    margin:0 auto;
+}

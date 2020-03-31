@@ -35,3 +35,11 @@ mutation LeaveGame($gameId: ID!){
     }
   }
 `;
+
+export const SUBMIT_PAGE = gql`
+mutation SubmitPage($sketchbookId: ID!, $gameId: ID!, $content: String!, $pageType: String!){
+    submitPage(sketchbookId: $sketchbookId, gameId: $gameId, content: $content, pageType: $pageType){
+        id
+    }
+}
+`;

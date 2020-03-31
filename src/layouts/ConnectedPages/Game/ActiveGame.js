@@ -1,8 +1,8 @@
 import React from 'react';
 import requireAuth from 'components/requireAuth';
-import GuessingMode from 'components/GuessingMode';
-import DrawingMode from 'components/DrawingMode';
-import InitMode from 'components/InitMode';
+import GuessingMode from 'components/GameModes/GuessingMode';
+import DrawingMode from 'components/GameModes/DrawingMode';
+import InitMode from 'components/GameModes/InitMode';
 import {useParams} from 'react-router-dom';
 
 import {useQuery} from '@apollo/react-hooks';
@@ -23,9 +23,9 @@ query GetSketchbookInfo($sketchbookId: ID!){
 
 
 const times ={
-    "init":90000,
-    "drawing":180000,
-    "guessing":120000
+    "init":9000,
+    "drawing":18000,
+    "guessing":12000
 }
 
 const ActiveGame = ({sketchbookId})=>{
@@ -51,7 +51,7 @@ const ActiveGame = ({sketchbookId})=>{
     : "init"
     console.log("ACTIVE-GAME : GAME MODE VALUE", gameMode)
 
-    const previousPage = gameMode==="init" ? {} :data.getSketchbookInfo.pages[-1]
+    const lastPage = gameMode==="init" ? {} : data.getSketchbookInfo.pages[data.getSketchbookInfo.pages.length-1]
     
     const selectGameMode = ()=>{
         if(gameMode=="init"){
@@ -63,13 +63,19 @@ const ActiveGame = ({sketchbookId})=>{
         }
         else if(gameMode==="drawing"){
             return <DrawingMode 
-            previousPage={previousPage} 
-            timer={times[gameMode]}/>
+            timer={times[gameMode]}
+            lastPage={lastPage}
+            gameId={gameId}
+            sketchbookId={sketchbookId}
+            />
         }
         else if(gameMode==="guessing"){
             return <GuessingMode 
-            previousPage={previousPage} 
-            timer={times[gameMode]}/>
+            timer={times[gameMode]}
+            lastPage={lastPage}
+            gameId={gameId}
+            sketchbookId={sketchbookId}
+            />
         }
     }
 

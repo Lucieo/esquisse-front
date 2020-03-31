@@ -8,7 +8,7 @@ const applyCountdown = (WrappedComponent) => {
             return(
                 !finished
                 ?<Countdown 
-                timer={10000} 
+                timer={props.timer} 
                 submiter={()=>setFinished(true)}/>
                 :
                 <p>
@@ -19,7 +19,9 @@ const applyCountdown = (WrappedComponent) => {
         }
         return (
             <>
-            {renderCounter()}
+            <div className="center">
+                {renderCounter()}
+            </div>
             <WrappedComponent
                 {...props}
                 finished={finished}

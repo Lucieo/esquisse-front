@@ -1,15 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import applyCountdown from 'components/Counter/applyCountdown';
 import {useMutation} from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import {SUBMIT_PAGE} from 'graphQL/mutations';
 
-const SUBMIT_PAGE = gql`
-mutation SubmitPage($sketchbookId: ID!, $gameId: ID!, $content: String!, $pageType: String!){
-    submitPage(sketchbookId: $sketchbookId, gameId: $gameId, content: $content, pageType: $pageType){
-        id
-    }
-}
-`;
 
 const InitMode = ({finished, gameId, sketchbookId})=>{
     const pageType = 'init';
