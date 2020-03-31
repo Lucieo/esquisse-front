@@ -8,7 +8,9 @@ const styles={
         height:'calc(100vh - 120px)'
     },
     loadingImage:{
-        maxWidth:"100%"
+        maxWidth:"100%",
+        width:400,
+        margin:"0 auto"
     }
 }
 export default function Loading(){

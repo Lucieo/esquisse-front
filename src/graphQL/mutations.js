@@ -27,3 +27,11 @@ mutation JoinGame($gameId: ID!){
     }
   }
 `;
+
+export const LEAVE_GAME = gql`
+mutation LeaveGame($gameId: ID!){
+    leaveGame(gameId: $gameId){
+        id
+    }
+  }
+`;

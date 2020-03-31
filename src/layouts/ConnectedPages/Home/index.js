@@ -3,10 +3,11 @@ import {useQuery, useApolloClient} from '@apollo/react-hooks';
 import {CURRENT_USER} from 'graphQL/queries';
 import './Home.css';
 import Loading from 'components/Loading';
-import CreateGame from 'components/CreateGame';
+import CreateGame from 'components/GameControls/CreateGame';
 import {Link} from 'react-router-dom';
 import requireAuth from 'components/requireAuth';
 import gql from 'graphql-tag';
+import { useHistory } from 'react-router-dom'
 
 const GET_USERID = gql`
 {
@@ -20,7 +21,8 @@ function Home(){
 
     if(loading) return <Loading/>
 
-    const user = data.currentUser
+    const user = data && data.currentUser
+
     return(
         <div className="center connected-home">
             <i className="material-icons large connected-home__icon" style={{color: user.iconColor, borderColor: user.iconColor}}>{user.icon}</i>

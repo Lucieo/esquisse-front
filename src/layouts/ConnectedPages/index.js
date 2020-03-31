@@ -71,7 +71,9 @@ export default function ConnectedPaged(){
                       <Route path="/profile">
                           <Profile/> 
                       </Route>
-                      <Route path="/game/:gameId">
+                      <Route 
+                        path="/game/:gameId"
+                      >
                           <Game/>
                       </Route>
                   </Switch>

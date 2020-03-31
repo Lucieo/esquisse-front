@@ -3,7 +3,7 @@ import requireAuth from 'components/requireAuth';
 import GuessingMode from 'components/GuessingMode';
 import DrawingMode from 'components/DrawingMode';
 import InitMode from 'components/InitMode';
-import Countdown from 'react-countdown';
+import {useParams} from 'react-router-dom';
 
 import {useQuery} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -20,6 +20,8 @@ query GetSketchbookInfo($sketchbookId: ID!){
 }
 `;
 
+
+
 const times ={
     "init":90000,
     "drawing":180000,
@@ -27,47 +29,52 @@ const times ={
 }
 
 const ActiveGame = ({sketchbookId})=>{
+    const {gameId} = useParams();
     const {data, loading, error} =useQuery(
         GET_SKETCHBOOK_DETAILS, 
         {
             variables: {
                 sketchbookId
             },
-            onCompleted(response){
-                console.log(response)
-            }
+            fetchPolicy:'network-only'
         }) ;
 
     if(loading) return <Loading/>
 
-    const gameMode = data.getSketchbookInfo.pages.length>0
+    console.log("GET SKETCHBOOK DETAILS CALL MADE ", data)
+    const gameMode = data && data.getSketchbookInfo.pages.length>0
     ? (
-        data.getSketchbookInfo.pages[-1].pageType==="drawing" 
+        data.getSketchbookInfo.pages[data.getSketchbookInfo.pages.length-1].pageType==="drawing" 
         ?"guessing"
         :"drawing"
     )
     : "init"
+    console.log("ACTIVE-GAME : GAME MODE VALUE", gameMode)
 
     const previousPage = gameMode==="init" ? {} :data.getSketchbookInfo.pages[-1]
     
     const selectGameMode = ()=>{
         if(gameMode=="init"){
-            return <InitMode/>
+            return <InitMode 
+            timer={times[gameMode]}
+            gameId={gameId}
+            sketchbookId={sketchbookId}
+            />
         }
         else if(gameMode==="drawing"){
-            return <DrawingMode previousPage={previousPage}/>
+            return <DrawingMode 
+            previousPage={previousPage} 
+            timer={times[gameMode]}/>
         }
         else if(gameMode==="guessing"){
-            return <GuessingMode previousPage={previousPage}/>
+            return <GuessingMode 
+            previousPage={previousPage} 
+            timer={times[gameMode]}/>
         }
     }
 
     return(
         <div className="container">
-            <div className="drawing-mode__countdown">
-                <i className="material-icons">access_alarm</i>
-                <Countdown date={Date.now() + times[gameMode]} />
-            </div>
             {selectGameMode()}
         </div>
     )

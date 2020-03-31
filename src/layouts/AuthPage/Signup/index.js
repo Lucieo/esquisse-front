@@ -1,21 +1,18 @@
 import React, {useState} from 'react';
 import { useApolloClient, useMutation } from "@apollo/react-hooks";
 import {SIGNUP_USER} from '../../../graphQL/mutations';
-import { useHistory } from "react-router-dom";
 import {isEmail, isLength} from 'validator';
 import './Signup.css';
 
 export default function SignUp(props){
-    const client = useApolloClient();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [signupErrors, setSignupErrors ]= useState('');
     const [isFormValid, setFormValid] = useState(false);
-    let history = useHistory();
     const [signupUser, { loading, error }] = useMutation(SIGNUP_USER, {
         onCompleted() {
-            history.push('/login');
+            window.location.reload()
         }
     });
 

@@ -3,11 +3,11 @@ import GameOver from './GameOver';
 import NewGame from './NewGame';
 import ActiveGame from './ActiveGame';
 import {useParams} from 'react-router-dom';
-import {useQuery, useSubscription} from '@apollo/react-hooks';
+import {useQuery, useSubscription, useMutation} from '@apollo/react-hooks';
 import requireAuth from 'components/requireAuth';
 import gql from 'graphql-tag';
 import Loading from 'components/Loading';
-import {USER_ID, IS_LOGGED_IN} from 'graphQL/localState';
+import {LEAVE_GAME} from 'graphQL/mutations';
 
 const GET_GAME_INFO= gql`
 query GetGameInfo($gameId:ID!){
@@ -34,6 +34,12 @@ subscription GameUpdate($gameId:ID!){
       creator
       turn
       sketchbooks
+      players{
+        id
+        name
+        icon
+        iconColor
+      }
     }
   }
 `
@@ -52,6 +58,9 @@ const Game = (props)=>{
     const [gameInfo, setGameInfo] = useState({})
     const user = useQuery(GET_USER_ID).data
     const userId = user && user.userId
+    const [leaveGame] = useMutation(LEAVE_GAME, {variables:{gameId}})
+
+    //window.onbeforeunload = () =>leaveGame()
 
     const { data, loading, error } = useQuery(
         GET_GAME_INFO,
@@ -65,19 +74,21 @@ const Game = (props)=>{
     const { dataSub, loadingSub } = useSubscription(
         GAME_UPDATE, {variables:{gameId},
         onSubscriptionData: ({client, subscriptionData})=>{
+            console.log('GAME-INDEX : SUBSCRIPTION NEW GAME INFO RECEIVED', subscriptionData.data.gameUpdate)
             setGameInfo({...gameInfo, ...subscriptionData.data.gameUpdate})
         }
         }
     );
 
     const getSketchbookId = ()=>{
-        console.log('GETSKETCHBOOKID', gameInfo.players)
+        console.log('GAME-INDEX-GETSKETCHBOOKID DATA  players:', gameInfo.players, 'turn ', gameInfo.turn, 'sketchbooks ', gameInfo.sketchbooks)
         let sketchbookId=""
         if(gameInfo.players){
             const playersIds = gameInfo.players.map(player=>player.id)
             const userIndex = playersIds.indexOf(userId)
-            sketchbookId = gameInfo.sketchbooks[userIndex+gameInfo.turn]
-            console.log("SKETCHBOOKID", sketchbookId)
+            const newIndex = (userIndex+gameInfo.turn>gameInfo.sketchbooks.length-1) ? gameInfo.turn : userIndex+gameInfo.turn
+            sketchbookId = gameInfo.sketchbooks[newIndex]
+            console.log("GAME-INDEX-GETSKETCHBOOKID CHOSEN", "index ", newIndex, "sketchbookid ", sketchbookId)
         }
         return sketchbookId
     }
@@ -88,7 +99,9 @@ const Game = (props)=>{
         if(status==="new"){
             return <NewGame 
             gameId={gameId} 
-            playerslist={gameInfo.players}/>
+            playerslist={gameInfo.players}
+            creatorId={gameInfo.creator}
+            />
         }
         else if(status==="active"){
             return <ActiveGame
