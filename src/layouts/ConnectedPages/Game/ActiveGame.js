@@ -5,7 +5,7 @@ import DrawingMode from 'components/GameModes/DrawingMode';
 import InitMode from 'components/GameModes/InitMode';
 import {useParams} from 'react-router-dom';
 
-import {useQuery} from '@apollo/react-hooks';
+import {useQuery, useSubscription} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import Loading from 'components/Loading';
 
@@ -40,8 +40,8 @@ const ActiveGame = ({sketchbookId})=>{
         }) ;
 
     if(loading) return <Loading/>
+    if(error) window.location.reload()
 
-    console.log("GET SKETCHBOOK DETAILS CALL MADE ", data)
     const gameMode = data && data.getSketchbookInfo.pages.length>0
     ? (
         data.getSketchbookInfo.pages[data.getSketchbookInfo.pages.length-1].pageType==="drawing" 
@@ -49,7 +49,6 @@ const ActiveGame = ({sketchbookId})=>{
         :"drawing"
     )
     : "init"
-    console.log("ACTIVE-GAME : GAME MODE VALUE", gameMode)
 
     const lastPage = gameMode==="init" ? {} : data.getSketchbookInfo.pages[data.getSketchbookInfo.pages.length-1]
     

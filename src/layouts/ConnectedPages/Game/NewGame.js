@@ -6,20 +6,8 @@ import {JOIN_GAME, LEAVE_GAME} from 'graphQL/mutations';
 import {useMutation, useSubscription, useQuery } from "@apollo/react-hooks";
 import gql from 'graphql-tag';
 import { CURRENT_USER } from 'graphQL/queries';
+import {PLAYER_UPDATE_SUBSCRIPTION} from 'graphQL/subscriptions'
 
-const PLAYER_UPDATE_SUBSCRIPTION = gql`
-  subscription PlayerUpdate($gameId: ID!) {
-    playerUpdate(gameId:$gameId){
-        players{
-            id
-            name
-            icon
-            iconColor
-        }
-        creator
-    }
-  }
-`;
 
 
 
@@ -32,7 +20,6 @@ const NewGame = ({gameId, playerslist, creatorId})=>{
     const { data, loadingSub } = useSubscription(
         PLAYER_UPDATE_SUBSCRIPTION, {variables:{gameId},
         onSubscriptionData: ({client, subscriptionData})=>{
-            console.log("NEW SUBSCRIPTION DATA ", subscriptionData.data)
             setPlayers(subscriptionData.data.playerUpdate.players)
             setCretor(subscriptionData.data.playerUpdate.creator)
         }

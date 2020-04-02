@@ -2,24 +2,10 @@ import React, { useState } from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import endGif from 'images/artist.gif';
 import Loading from 'components/Loading';
-import SketchbookDisplay from 'components/Sketchbook/SketchbookDisplay'
+import SketchbookDisplay from 'components/Sketchbook/SketchbookDisplay';
+import {GET_ALL_SKETCHBOOKS} from 'graphQL/queries';
 import './Game.css';
 
-import gql from 'graphql-tag'
-
-const GET_ALL_SKETCHBOOKS = gql`
-    query GetAllSketchbooks($gameId: ID!){
-        getAllSketchbooks(gameId:$gameId){
-            pages{
-                content
-                pageType
-                creator{
-                    name
-                }
-            }
-        }
-    }
-`;
 
 const GameOver = ({gameId})=>{
     const [sketchbook, setSketchbook] = useState();

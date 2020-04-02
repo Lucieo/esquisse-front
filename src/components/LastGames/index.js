@@ -20,7 +20,9 @@ export default function LastGames(){
                 data && data.getLastUserGames.length>0
                 ? data.getLastUserGames.map((game, index)=>{
                     return(
-                        <div className="last-games__game-wrapper">
+                        <div className="last-games__game-wrapper"
+                        key={index}
+                        >
                             <div className="last-games__game-border">
                                 <span>Partie {index+1}</span>
                                 <Link to={"/game/"+game.id}>
