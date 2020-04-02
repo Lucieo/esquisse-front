@@ -15,7 +15,7 @@ export default function LogoutButton() {
       }}
     >
         <a>
-            Déconnexion
+           <i className="material-icons">exit_to_app</i>
         </a>
     </li>
   );

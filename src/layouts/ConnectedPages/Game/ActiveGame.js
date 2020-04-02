@@ -23,9 +23,9 @@ query GetSketchbookInfo($sketchbookId: ID!){
 
 
 const times ={
-    "init":9000,
-    "drawing":18000,
-    "guessing":12000
+    "init":20000,
+    "drawing":20000,
+    "guessing":20000
 }
 
 const ActiveGame = ({sketchbookId})=>{

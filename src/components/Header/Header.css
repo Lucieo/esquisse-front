@@ -1,3 +1,8 @@
 .nav__title{
     font-size: 1.5rem;
 }
+
+.nav__right-menu, .brand-logo{
+    display: flex!important;
+    flex-direction: row-reverse!important;
+}

@@ -1,0 +1,11 @@
+.admin-control__info{
+    font-style: italic;
+    min-height: 21px;
+    margin: 0;
+}
+
+.admin-controls__share-link{
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}

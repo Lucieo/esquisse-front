@@ -43,3 +43,12 @@ mutation SubmitPage($sketchbookId: ID!, $gameId: ID!, $content: String!, $pageTy
     }
 }
 `;
+
+export const LAUNCH_GAME = gql`
+mutation ChangeGameStatus($newStatus:String!, $gameId: ID!){
+    changeGameStatus(gameId:$gameId, newStatus:$newStatus){
+      status
+      id
+    }
+  }
+`;

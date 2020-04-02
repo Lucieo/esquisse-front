@@ -4,3 +4,21 @@
     border: 1px solid lightgray;
     border-radius: 4px;
 }
+
+.sketchbook-display__wrapper{
+    padding: 30px;
+    top: 10%;
+    max-height: none;
+    bottom: 10%;
+}
+.modal{
+    z-index: 1000;
+}
+.modal-overlay{
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+.open .modal-overlay, .open .sketchbook-display__wrapper{
+    display: block;
+}

@@ -43,6 +43,7 @@ const GuessingPanel = ({lastPage, finished, sketchbookId, gameId})=>{
                     <input
                         placeholder="Je vois je vois..."
                         disabled={finished}
+                        onChange={e=>setContent(e.target.value)}
                     />
                 </form>
           </div>

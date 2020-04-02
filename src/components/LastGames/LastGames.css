@@ -1,0 +1,26 @@
+.last-games__game-wrapper{
+    padding: 10px;
+}
+
+.last-games____see-btn{
+    margin-left:10px;
+}
+
+.last-games__game-border{
+    border: 1px solid lightgray;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.last-games{
+    max-width: 350px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.last-games__loader{
+    max-width: 250px;
+}

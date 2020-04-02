@@ -22,7 +22,9 @@ query GetGameInfo($gameId:ID!){
         iconColor
       }
       creator
-      sketchbooks
+      sketchbooks{
+        id
+      }
     }
   }
 `
@@ -33,16 +35,19 @@ subscription GameUpdate($gameId:ID!){
       status
       creator
       turn
-      sketchbooks
       players{
         id
         name
         icon
         iconColor
       }
+      sketchbooks{
+        id
+      }
     }
   }
 `
+
 const GET_USER_ID = gql`
   {
     userId @client
@@ -66,6 +71,7 @@ const Game = (props)=>{
         GET_GAME_INFO,
         { variables: {gameId},
             onCompleted({getGameInfo}){
+              console.log("GET GAME INFO")
                 setGameInfo(getGameInfo)
             }
         }
@@ -93,12 +99,12 @@ const Game = (props)=>{
             console.log("nextIndex>sketchbooksMaxIndexes ", nextIndex>sketchbooksMaxIndexes)
             const newIndex = (nextIndex>sketchbooksMaxIndexes) ? (nextIndex-sketchbooksMaxIndexes-1) : nextIndex
 
-            sketchbookId = gameInfo.sketchbooks[newIndex]
+            sketchbookId = gameInfo.sketchbooks.map(sketchbook=>sketchbook.id)[newIndex]
             console.log("GAME-INDEX-GETSKETCHBOOKID CHOSEN", "index ", newIndex, "sketchbookid ", sketchbookId)
         }
         return sketchbookId
     }
-
+    console.log(gameInfo)
     if(loading) return <Loading/>
 
     const selectGameStatus = ({status})=>{

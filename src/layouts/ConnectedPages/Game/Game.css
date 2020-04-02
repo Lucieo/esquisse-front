@@ -2,3 +2,13 @@
     max-width: 100%;
     width:400px;
 }
+
+.game-over__result-btn{
+    width: 100%;
+    max-width: 400px;
+}
+
+.game-over__result-bnt-wrapper{
+    padding: 10px;
+}
+

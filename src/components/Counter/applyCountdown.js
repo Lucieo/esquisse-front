@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Countdown from 'components/Counter/Countdown';
+import StopGame from 'components/StopGame';
 
 const applyCountdown = (WrappedComponent) => {
     const HOC = (props)=>{
@@ -10,11 +11,8 @@ const applyCountdown = (WrappedComponent) => {
                 ?<Countdown 
                 timer={props.timer} 
                 submiter={()=>setFinished(true)}/>
-                :
-                <p>
-                    <i className="material-icons">do_not_disturb_on</i>
-                    <span>TERMINÉ - HAUT LES MAINS!</span>
-                </p>
+                :<StopGame/>
+
             )
         }
         return (

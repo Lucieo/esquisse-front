@@ -11,3 +11,11 @@ export const CURRENT_USER = gql`
     }
   }
 `;
+
+export const LAST_GAMES = gql`
+{
+    getLastUserGames{
+        id
+    }
+}
+`

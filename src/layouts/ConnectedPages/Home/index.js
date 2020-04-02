@@ -6,14 +6,7 @@ import Loading from 'components/Loading';
 import CreateGame from 'components/GameControls/CreateGame';
 import {Link} from 'react-router-dom';
 import requireAuth from 'components/requireAuth';
-import gql from 'graphql-tag';
-import { useHistory } from 'react-router-dom'
-
-const GET_USERID = gql`
-{
-    userId @client
-}
-`
+import LastGames from 'components/LastGames';
 
 function Home(){
     const client = useApolloClient();
@@ -23,16 +16,18 @@ function Home(){
 
     const user = data && data.currentUser
 
+
     return(
         <div className="center connected-home">
             <i className="material-icons large connected-home__icon" style={{color: user.iconColor, borderColor: user.iconColor}}>{user.icon}</i>
-            <p>Bienvenue</p>
+            <h5>Bienvenue</h5>
             <h4>{user.name}</h4>
             <p>Profil</p>
             <Link to="/profile" className="btn">
                 Modifier Mon profil
             </Link>
             <CreateGame/>
+            <LastGames/>
         </div>
     )
 }

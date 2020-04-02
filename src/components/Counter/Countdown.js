@@ -5,13 +5,13 @@ export default function Countdown({timer, submiter}){
     const counterAspect = ({ hours, minutes, seconds}) => {
         return(
             <p>
-                <i className="material-icons">access_alarm</i>
+                <i className="material-icons small">access_alarm</i>
                 <span>{hours}:{minutes}:{seconds}</span>
             </p>
         )
       };
     return(
-    <div>
+    <div style={{fontSize:"2rem"}}>
         <Counter 
         date={Date.now() + timer} 
         renderer={counterAspect}
