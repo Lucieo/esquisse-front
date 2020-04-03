@@ -44,7 +44,7 @@ mutation SubmitPage($sketchbookId: ID!, $gameId: ID!, $content: String!, $pageTy
 }
 `;
 
-export const LAUNCH_GAME = gql`
+export const CHANGE_GAME_STATUS = gql`
 mutation ChangeGameStatus($newStatus:String!, $gameId: ID!){
     changeGameStatus(gameId:$gameId, newStatus:$newStatus){
       status

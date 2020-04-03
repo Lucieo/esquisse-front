@@ -17,6 +17,7 @@ import { split, HttpLink } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/link-ws';
 import {resolvers, localType} from 'graphQL/localState';
+import PdfFormat from 'components/PdfFormat';
 
 const cache = new InMemoryCache();
 
@@ -75,6 +76,11 @@ export default function ConnectedPaged(){
                         path="/game/:gameId"
                       >
                           <Game/>
+                      </Route>
+                      <Route 
+                        path="/pdf/:gameId"
+                      >
+                          <PdfFormat/>
                       </Route>
                   </Switch>
               </ConnectedPageContainer>

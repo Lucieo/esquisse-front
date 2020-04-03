@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import {useQuery} from '@apollo/react-hooks';
 import endGif from 'images/artist.gif';
 import Loading from 'components/Loading';
-import SketchbookDisplay from 'components/Sketchbook/SketchbookDisplay';
+import Modal from 'components/Modal';
+import SketchbookDisplay from 'components/SketchbookDisplay';
 import {GET_ALL_SKETCHBOOKS} from 'graphQL/queries';
 import './Game.css';
 
@@ -42,13 +43,16 @@ const GameOver = ({gameId})=>{
             </div>
             {
                 sketchbook &&
-                <SketchbookDisplay 
-                    sketchbook={sketchbook}
+                <Modal
                     open={openedModal}
                     closeModal={()=>{
                         setOpenedModal(false); setSketchbook();
                     }}
-                />
+                >
+                    <SketchbookDisplay 
+                        sketchbook={sketchbook}
+                    />
+                </Modal>
             }
         </div>
     )

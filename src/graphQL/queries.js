@@ -16,6 +16,11 @@ export const LAST_GAMES = gql`
 {
     getLastUserGames{
         id
+        sketchbooks{
+          pages{
+            content
+          }
+        }
     }
 }
 `
@@ -55,6 +60,17 @@ query GetAllSketchbooks($gameId: ID!){
             creator{
                 name
             }
+        }
+    }
+}
+`;
+
+export const GET_SKETCHBOOK_DETAILS = gql`
+query GetSketchbookInfo($sketchbookId: ID!){
+    getSketchbookInfo(sketchbookId:$sketchbookId){
+        pages{
+            content
+            pageType
         }
     }
 }

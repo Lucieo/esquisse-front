@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import {useMutation} from '@apollo/react-hooks';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import './Controls.css';
-import {LAUNCH_GAME} from 'graphQL/mutations';
+import {CHANGE_GAME_STATUS} from 'graphQL/mutations';
 
 
 
 
 
 export default function AdminGameControls({gameId, players}){
-    const [launchGame, { loading, error }] = useMutation(LAUNCH_GAME, {variables:{gameId, newStatus:"active"}})
+    const [launchGame, { loading, error }] = useMutation(CHANGE_GAME_STATUS, {variables:{gameId, newStatus:"active"}})
     const [copied, setCopied] = useState(false)
     if(loading) return <div></div>
     return(

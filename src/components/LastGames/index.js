@@ -10,10 +10,13 @@ export default function LastGames(){
 
     return(
         <div className="last-games">
-            <p>VOS DERNIERES PARTIES</p>
+            <p>VOTRE DERNIÈRE PARTIE</p>
+            <i>attention les parties sont effacées après 24h</i>
             {
                 loading &&
-                <div><img className="last-games__loader" src={gearLoader}/></div>
+                <div>
+                    <img className="last-games__loader" src={gearLoader}/>
+                </div>
 
             }
             {
@@ -23,16 +26,23 @@ export default function LastGames(){
                         <div className="last-games__game-wrapper"
                         key={index}
                         >
+                        <Link to={"/game/"+game.id}>
                             <div className="last-games__game-border">
-                                <span>Partie {index+1}</span>
-                                <Link to={"/game/"+game.id}>
+                                <div className="last-games__title">
+                                    <span>Voir la partie</span>
                                     <i className="material-icons">remove_red_eye</i>
-                                </Link>
+                                </div>
+                                <div>
+                                    {
+                                        game.sketchbooks.map((sketchbook, index)=> <span key={index}>{(index!==0) && " /"} {sketchbook.pages[0].content}</span> )
+                                    }
+                                </div>
                             </div>
+                        </Link>
                         </div>
                     )
                 })
-                :<p>aucune partie jouée pour le moment</p>
+                :<p>aucune partie disponible</p>
             }
         </div>
     )
