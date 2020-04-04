@@ -6,6 +6,7 @@ import Modal from 'components/Modal';
 import SketchbookDisplay from 'components/SketchbookDisplay';
 import {GET_ALL_SKETCHBOOKS} from 'graphQL/queries';
 import './Game.css';
+import {Link} from 'react-router-dom';
 
 
 const GameOver = ({gameId})=>{
@@ -22,6 +23,7 @@ const GameOver = ({gameId})=>{
             <h2>NOICE!</h2>
             <p>Le jeu est maintenant terminé.</p> 
             <p>Découvrez ci dessous les performances artistiques de vos amis!</p>
+            <div><Link to={"/pdf/"+gameId}><button className="btn game-over__pdf-btn">Par ici pour la version pdf</button></Link></div>
             <img className="game-over__gif" src={endGif} alt="artist"/>
             <div>
                 {

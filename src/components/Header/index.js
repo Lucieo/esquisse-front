@@ -11,7 +11,6 @@ import {useQuery} from '@apollo/react-hooks';
 export default requireAuth(function Header(){
     const {data, loading, error}= useQuery(CURRENT_USER);
     const name = data && data.currentUser.name
-    console.log(name)
         return(
             <nav>
             <div className="nav-wrapper">

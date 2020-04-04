@@ -25,6 +25,12 @@ const InitMode = ({finished, gameId, sketchbookId})=>{
         }
     }, [finished]);
 
+    window.onbeforeunload = function(event)
+    {
+        console.log('BEFORE RELOAD')
+        submitPage()
+    };
+
     return(
         <>
             {

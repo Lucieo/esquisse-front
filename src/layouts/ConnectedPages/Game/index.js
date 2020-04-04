@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import GameOver from './GameOver';
 import NewGame from './NewGame';
 import ActiveGame from './ActiveGame';
@@ -8,7 +8,8 @@ import requireAuth from 'components/requireAuth';
 import Loading from 'components/Loading';
 import {GET_GAME_INFO, GET_USER_ID} from 'graphQL/queries';
 import {LEAVE_GAME} from 'graphQL/mutations';
-import {GAME_UPDATE, SUBMIT_UPDATE} from 'graphQL/subscriptions'
+import {GAME_UPDATE, SUBMIT_UPDATE} from 'graphQL/subscriptions';
+import NothingToSee from 'components/NothingToSee';
 
 
 const Game = (props)=>{
@@ -16,17 +17,20 @@ const Game = (props)=>{
     const [gameInfo, setGameInfo] = useState({})
     const user = useQuery(GET_USER_ID).data
     const userId = user && user.userId
-    const [leaveGame] = useMutation(LEAVE_GAME, {variables:{gameId}})
-    
+    const [leaveGame] = useMutation(LEAVE_GAME, {variables:{gameId}, refetchQueries: [{
+        query: GET_GAME_INFO,
+        variables: {gameId}
+    }]})
 
 
     const { data, loading, error } = useQuery(
         GET_GAME_INFO,
         { variables: {gameId},
             onCompleted({getGameInfo}){
-              console.log('GET_GAME_INFO CALLED')
+                console.log("GET_GAME_INFO ", getGameInfo)
                 setGameInfo(getGameInfo)
             },
+            fetchPolicy:'network-only',
             onError(...error) {
               console.log(error)
             }
@@ -36,7 +40,7 @@ const Game = (props)=>{
     const { dataSub, loadingSub } = useSubscription(
         GAME_UPDATE, {variables:{gameId},
         onSubscriptionData: ({client, subscriptionData})=>{
-            console.log('NEW GAME DATA RECEIVED ', subscriptionData.data.gameUpdate)
+            console.log('GAME UPDATED INFO ', subscriptionData.data.gameUpdate)
             setGameInfo({...gameInfo, ...subscriptionData.data.gameUpdate})
         },
         onError(...error) {
@@ -44,6 +48,13 @@ const Game = (props)=>{
         }
         }
     );
+
+    useEffect(() => {
+        return function cleanup() {
+            console.log("LEAVING GAME!")
+            leaveGame()
+        };
+      }, []);
 
     if(loading) return <Loading/>
 
@@ -66,6 +77,9 @@ const Game = (props)=>{
             gameId={gameId} 
             sketchbooks={gameInfo.sketchbooks}
             />
+        }
+        else{
+            return <NothingToSee/>
         }
     }
 

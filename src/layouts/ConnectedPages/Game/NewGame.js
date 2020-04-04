@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PlayerItem from 'components/PlayerItem';
 import AdminGameControls from 'components/GameControls/AdminGameControls';
 import PlayerControls from 'components/GameControls/PlayerControls';
@@ -12,19 +12,20 @@ import {PLAYER_UPDATE_SUBSCRIPTION} from 'graphQL/subscriptions'
 
 
 const NewGame = ({gameId, playerslist, creatorId})=>{
-    const [creator, setCretor] = useState(creatorId);
+    const [creator, setCreator] = useState(creatorId);
     const [players, setPlayers] = useState([...playerslist]);
     const {data: {currentUser}} = useQuery(CURRENT_USER)
     const [joinGame, { loading, error }] = useMutation(JOIN_GAME, {variables:{gameId}})
-    //const [leaveGame] = useMutation(LEAVE_GAME, {variables:{gameId}})
+    const [leaveGame] = useMutation(LEAVE_GAME, {variables:{gameId}})
     const { data, loadingSub } = useSubscription(
         PLAYER_UPDATE_SUBSCRIPTION, {variables:{gameId},
         onSubscriptionData: ({client, subscriptionData})=>{
             setPlayers(subscriptionData.data.playerUpdate.players)
-            setCretor(subscriptionData.data.playerUpdate.creator)
+            setCreator(subscriptionData.data.playerUpdate.creator)
         }
         }
     );
+
     
     const isGameAdmin = (currentUser.id === creator)
     const hasJoined = players.map(player=>player.id).indexOf(currentUser.id)>-1

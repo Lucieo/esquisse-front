@@ -26,6 +26,12 @@ const DrawingMode=({lastPage, finished, gameId, sketchbookId})=>{
         }
     });
 
+    window.onbeforeunload = function(event)
+    {
+        console.log('BEFORE RELOAD')
+        submitPage()
+    };
+
     useEffect(() => {
         if(finished){
             submitPage()

@@ -10,7 +10,7 @@ export default function SketchbookDisplay({sketchbook}){
     return(
         <div>
             <div className="">
-                <h3>{initialWord}</h3>
+                <h4>{initialWord}</h4>
                 <p>proposé par {initialCreator}</p>
             </div>
             <div className="">
@@ -18,7 +18,6 @@ export default function SketchbookDisplay({sketchbook}){
                     restOfPages.map(
                         (page, index)=>{
                             if(page.pageType==="drawing"){
-                                console.log(page.content)
                                 return(
                                 <div 
                                 key={index}

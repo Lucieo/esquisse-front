@@ -5,6 +5,7 @@ subscription GameUpdate($gameId:ID!){
     gameUpdate(gameId:$gameId){
       status
       creator
+      turn
       players{
         id
         name
@@ -32,10 +33,10 @@ subscription PlayerUpdate($gameId: ID!) {
 }
 `;
 
-export const SUBMIT_UPDATE = gql`
-subscription SubmitUpdate($gameId: ID!) {
-  submitUpdate(gameId:$gameId){
-        gameId
+export const TIME_TO_SUBMIT = gql`
+  subscription TimeToSubmit($gameId: ID!){
+    timeToSubmit(gameId:$gameId){
+      id
+    }
   }
-}
 `;

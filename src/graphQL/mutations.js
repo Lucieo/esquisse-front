@@ -52,3 +52,4 @@ mutation ChangeGameStatus($newStatus:String!, $gameId: ID!){
     }
   }
 `;
+
