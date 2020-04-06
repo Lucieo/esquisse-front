@@ -21,9 +21,8 @@ const GuessingPanel = ({lastPage, finished, sketchbookId, gameId})=>{
         }
     });
 
-    window.onbeforeunload = function(event)
-    {
-        console.log('BEFORE RELOAD')
+    window.onbeforeunload = function(){
+        console.log('LEAVING PAGE')
         submitPage()
     };
 

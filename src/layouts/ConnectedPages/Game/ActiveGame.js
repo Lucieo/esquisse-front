@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
 import requireAuth from 'components/requireAuth';
-import {useQuery, useSubscription} from '@apollo/react-hooks';
+import {useQuery} from '@apollo/react-hooks';
 import Loading from 'components/Loading';
 import {GET_SKETCHBOOK_DETAILS} from 'graphQL/queries';
-import {TIME_TO_SUBMIT} from 'graphQL/subscriptions';
-import GameModes from 'components/GameModes'
+import GameModes from 'components/GameModes';
+
+
 
 
 const ActiveGame = ({gameInfo, userId})=>{
     const turn = gameInfo.turn
     const [pages, setPages] = useState({});
-    const timeToSubmit = useSubscription(
-        TIME_TO_SUBMIT, {variables:{gameId:gameInfo.id},
-        onSubscriptionData: ({client, subscriptionData})=>{
-            console.log('TIME TO SUBMIT')
-        }
-        }
-    );
 
     const getSketchbookId = ()=>{
         let sketchbookId=""
@@ -32,7 +26,7 @@ const ActiveGame = ({gameInfo, userId})=>{
     const sketchbookId = getSketchbookId();
 
     const {data, loading, error} =useQuery(
-        GET_SKETCHBOOK_DETAILS, 
+        GET_SKETCHBOOK_DETAILS,
         {
             variables: {
                 sketchbookId
@@ -52,12 +46,9 @@ const ActiveGame = ({gameInfo, userId})=>{
     return(
         <div className="container">
             {
-                // gameEnd
-                // ? <EndOfGame endGame={endGame}/>
-                // :
-                <GameModes 
-                    pages={pages} 
-                    sketchbookId={sketchbookId} 
+                <GameModes
+                    pages={pages}
+                    sketchbookId={sketchbookId}
                     turn={turn}
                 />
             }

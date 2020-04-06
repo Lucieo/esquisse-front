@@ -10,6 +10,7 @@ import {GET_GAME_INFO, GET_USER_ID} from 'graphQL/queries';
 import {LEAVE_GAME} from 'graphQL/mutations';
 import {GAME_UPDATE, SUBMIT_UPDATE} from 'graphQL/subscriptions';
 import NothingToSee from 'components/NothingToSee';
+import OnGoingGame from './OnGoingGame';
 
 
 const Game = (props)=>{
@@ -66,11 +67,14 @@ const Game = (props)=>{
             creatorId={gameInfo.creator}
             />
         }
-        else if(status==="active"){
+        else if(status==="active" && gameInfo.players.map(player=>player.id).indexOf(userId)>-1){
             return <ActiveGame
                 gameInfo={gameInfo}
                 userId={userId}
             />
+        }
+        else if(status==="active"){
+            return <OnGoingGame/>
         }
         else if(status==="over"){
             return <GameOver
@@ -78,7 +82,7 @@ const Game = (props)=>{
             sketchbooks={gameInfo.sketchbooks}
             />
         }
-        else{
+        else if(status=="abandonned"){
             return <NothingToSee/>
         }
     }

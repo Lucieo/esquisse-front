@@ -1,0 +1,13 @@
+.submit-mode{
+    height: calc(100vh - 90px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.submit-mode img{
+    max-width: 300px;
+    width: 100%;
+}

@@ -3,11 +3,12 @@ import {useParams} from 'react-router-dom';
 import GuessingMode from 'components/GameModes/GuessingMode';
 import DrawingMode from 'components/GameModes/DrawingMode';
 import InitMode from 'components/GameModes/InitMode';
+import SubmitMode from 'components/GameModes/SubmitMode';
 
 const timers ={
-    "init":30000,
-    "drawing":30000,
-    "guessing":30000,
+    "init":60000,
+    "drawing":60000,
+    "guessing":60000,
     "loading":0
 }
 
@@ -55,7 +56,7 @@ export default function GameMode({pages, sketchbookId, turn}){
             />
         }
         else{
-            return <div>VOUS AVEZ DEJA SUBMIT ATTENDEZ LES AUTRES</div>
+            return <SubmitMode/>
         }
     }
 

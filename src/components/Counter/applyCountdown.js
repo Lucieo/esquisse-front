@@ -1,10 +1,25 @@
 import React, {useState} from "react";
 import Countdown from 'components/Counter/Countdown';
 import StopGame from 'components/StopGame';
+import {TIME_TO_SUBMIT} from 'graphQL/subscriptions';
+import {useSubscription} from '@apollo/react-hooks';
+import {useParams} from 'react-router-dom';
 
 const applyCountdown = (WrappedComponent) => {
     const HOC = (props)=>{
+        const {gameId} = useParams();
         const [finished, setFinished] = useState(false);
+        const [submit, setSubmit] = useState(false);
+
+        const timeToSubmit = useSubscription(
+            TIME_TO_SUBMIT, {variables:{gameId},
+            onSubscriptionData: ({client, subscriptionData})=>{
+                console.log('TIME TO SUBMIT')
+                setSubmit(true)
+            }
+            }
+        );
+
         const renderCounter=()=>{
             return(
                 !finished
@@ -22,7 +37,7 @@ const applyCountdown = (WrappedComponent) => {
             </div>
             <WrappedComponent
                 {...props}
-                finished={finished}
+                finished={submit}
             />
             </>
         );

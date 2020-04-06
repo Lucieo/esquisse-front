@@ -6,12 +6,15 @@ import gearLoader from 'images/gearLoader.gif'
 import './LastGames.css';
 
 export default function LastGames(){
-    const { data, loading, error } = useQuery(LAST_GAMES);
+    const { data, loading, error } = useQuery(LAST_GAMES,
+        {
+            fetchPolicy:"network-only"
+        });
 
     return(
         <div className="last-games">
             <p>VOTRE DERNIÈRE PARTIE</p>
-            <i>attention les parties sont effacées après 24h</i>
+            <i>attention les parties sont effacées toutes les 30mn</i>
             {
                 loading &&
                 <div>
