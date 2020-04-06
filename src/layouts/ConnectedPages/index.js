@@ -23,11 +23,11 @@ const cache = new InMemoryCache();
 
 const httpLink = new HttpLink({
   headers: { authorization: localStorage.getItem('esquisse-token') },
-  uri: 'http://localhost:4000/graphql'
+  uri: process.env.NODE_ENV === "development" ? 'http://localhost:4000/graphql' : "https://esquisse-api.herokuapp.com/graphql"
 });
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/graphql`,
+  uri: process.env.NODE_ENV === "development" ? `ws://localhost:4000/graphql` : "ws://esquisse-api.herokuapp.com/graphql",
   options: {
     reconnect: true
   }

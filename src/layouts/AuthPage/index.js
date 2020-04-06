@@ -14,7 +14,7 @@ import { ApolloProvider } from "react-apollo";
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
- uri: "http://localhost:4000/graphql"
+ uri: process.env.NODE_ENV === "development" ? 'http://localhost:4000/graphql' : "https://esquisse-api.herokuapp.com/graphql"
 });
  
 const client = new ApolloClient({
