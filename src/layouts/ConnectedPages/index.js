@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
+    HashRouter,
     Switch,
     Route,
 } from "react-router-dom";
@@ -27,7 +27,7 @@ const httpLink = new HttpLink({
 });
 
 const wsLink = new WebSocketLink({
-  uri: process.env.NODE_ENV === "development" ? `ws://localhost:4000/graphql` : "ws://esquisse-api.herokuapp.com/graphql",
+  uri: process.env.NODE_ENV === "development" ? `ws://localhost:4000/graphql` : "wss://esquisse-api.herokuapp.com/graphql",
   options: {
     reconnect: true
   }
@@ -63,7 +63,7 @@ cache.writeData({
 export default function ConnectedPaged(){
     return(
         <ApolloProvider client={client}>
-            <Router>
+            <HashRouter>
               <ConnectedPageContainer>
                   <Switch>
                       <Route path="/" exact>
@@ -84,7 +84,7 @@ export default function ConnectedPaged(){
                       </Route>
                   </Switch>
               </ConnectedPageContainer>
-            </Router>
+            </HashRouter>
         </ApolloProvider>
     )
 }
