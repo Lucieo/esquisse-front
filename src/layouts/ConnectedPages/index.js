@@ -27,7 +27,7 @@ const httpLink = new HttpLink({
 });
 
 const wsLink = new WebSocketLink({
-  uri: process.env.NODE_ENV === "development" ? `ws://localhost:4000/graphql` : "ws://esquisse-api.herokuapp.com/graphql",
+  uri: process.env.NODE_ENV === "development" ? `ws://localhost:4000/graphql` : "wss://esquisse-api.herokuapp.com/graphql",
   options: {
     reconnect: true
   }
