@@ -10,7 +10,13 @@ import LastGames from 'components/LastGames';
 
 function Home(){
     const client = useApolloClient();
-    const { data, loading, error } = useQuery(CURRENT_USER);
+    const { data, loading, error } = useQuery(
+        CURRENT_USER,
+        {
+            fetchPolicy: "network-only"
+        }
+    
+    );
 
     if(loading) return <Loading/>
 

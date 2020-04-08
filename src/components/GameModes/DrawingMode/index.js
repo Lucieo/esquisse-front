@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import CanvasDraw from "react-canvas-draw";
 import DrawingTools from './DrawingTools';
-import DrawingControls from './DrawingControls';
+import DeleteAll from './DeleteAll';
+import DeleteLastStroke from "./DeleteLastStroke";
 import applyCountdown from 'components/Counter/applyCountdown';
 import {SUBMIT_PAGE} from 'graphQL/mutations';
 import {useMutation} from '@apollo/react-hooks';
@@ -9,7 +10,7 @@ import './Drawing.css';
 
 
 const DrawingMode=({lastPage, finished, gameId, sketchbookId})=>{
-    const [brushColor, setBrushColor]=useState("#2196f3");
+    const [brushColor, setBrushColor]=useState("#000000");
     const [brushRadius, setBrushRadius]=useState(2);
     const [content, setContent]=useState('');
 
@@ -38,30 +39,35 @@ const DrawingMode=({lastPage, finished, gameId, sketchbookId})=>{
     }, [finished]);
 
         return(
-            <div>
-                <div className="center">
-                    <p>LE MOT A DESSINER EST</p>
-                    <h3>{lastPage.content}</h3>
+            <div className="drawing-mode">
+                <div className="row">
+                    <div className="col m4 s12">
+                        <DrawingTools
+                        setBrushColor={setBrushColor}
+                        setBrushRadius={setBrushRadius}
+                        content={content}
+                        brushRadius={brushRadius}
+                        content={content}
+                        />
+                    </div>
+                    <div className="col m8 s12">
+                        <div className="center">
+                            <p>LE MOT A DESSINER EST</p>
+                            <h3>{lastPage.content}</h3>
+                        </div>
+                        <CanvasDraw
+                            ref={canvasDraw => setContent(canvasDraw)}
+                            brushRadius= {brushRadius}
+                            lazyRadius={2}
+                            brushColor={brushColor}
+                            className="drawing-mode__canvas"
+                            disabled={finished}
+                            hideGrid={finished}
+                            canvasWidth={500}
+                            canvasHeight={400}
+                        />
+                    </div>
                 </div>
-                <DrawingTools
-                    setBrushColor={setBrushColor}
-                    setBrushRadius={setBrushRadius}
-                    content={content}
-                    brushRadius={brushRadius}
-                />
-                <DrawingControls
-                    content={content}
-                />
-                <CanvasDraw
-                    ref={canvasDraw => setContent(canvasDraw)}
-                    brushRadius= {brushRadius}
-                    lazyRadius={2}
-                    brushColor={brushColor}
-                    className="drawing-mode__canvas"
-                    disabled={finished}
-                    hideGrid={finished}
-                />
-                
             </div>
         )
 }

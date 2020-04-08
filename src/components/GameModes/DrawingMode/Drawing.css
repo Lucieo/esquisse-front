@@ -1,5 +1,12 @@
+.drawing-mode{
+    padding-bottom: 50px;
+}
+
 .drawing-mode__canvas{
     margin: 0 auto;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin-top: 25px;
 }
 .drawing-mode__countdown{
     text-align: center;
@@ -17,6 +24,15 @@
 
 .drawing-tools .circle-picker{
     margin: 0 auto!important;
+}
+
+.drawing-tools__color{
+padding: 0px 10px;
+}
+
+.circle-picker{
+    max-width: 100%;
+    justify-content: center;
 }
 
 .drawing-tools .brush-size{

@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Countdown from 'components/Counter/Countdown';
 import StopGame from 'components/StopGame';
 import {TIME_TO_SUBMIT} from 'graphQL/subscriptions';
 import {useSubscription} from '@apollo/react-hooks';
 import {useParams} from 'react-router-dom';
+import "./CountDown.css";
 
 const applyCountdown = (WrappedComponent) => {
     const HOC = (props)=>{
@@ -20,6 +21,21 @@ const applyCountdown = (WrappedComponent) => {
             }
         );
 
+        useEffect(() => {
+            const header = document.getElementById("CountDown");
+            const sticky = header.offsetTop;
+            const scrollCallBack = window.addEventListener("scroll", () => {
+              if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+              } else {
+                header.classList.remove("sticky");
+              }
+            });
+            return () => {
+              window.removeEventListener("scroll", scrollCallBack);
+            };
+          }, []);
+
         const renderCounter=()=>{
             return(
                 !finished
@@ -32,7 +48,7 @@ const applyCountdown = (WrappedComponent) => {
         }
         return (
             <>
-            <div className="center">
+            <div className="center"                 id="CountDown">
                 {renderCounter()}
             </div>
             <WrappedComponent

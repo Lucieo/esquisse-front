@@ -12,6 +12,7 @@ const ActiveGame = ({gameInfo, userId})=>{
     const turn = gameInfo.turn
     const [pages, setPages] = useState({});
 
+
     const getSketchbookId = ()=>{
         let sketchbookId=""
         if(gameInfo.players){
@@ -44,7 +45,7 @@ const ActiveGame = ({gameInfo, userId})=>{
     if(loading) return <Loading/>
 
     return(
-        <div className="container">
+        <div className="active-game">
             {
                 <GameModes
                     pages={pages}

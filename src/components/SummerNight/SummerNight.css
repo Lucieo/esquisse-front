@@ -1,0 +1,36 @@
+.summer-mode__background{
+    background-repeat: no-repeat!important;
+    background-size: cover!important;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -10000;
+}
+
+.switch{
+    padding: 10px;
+}
+.summer-mode{
+    background: white;
+}
+.summer-mode label{
+    font-size: 1rem;
+}
+.summer-mode__svg{
+    width: 50px;
+    height: 50px;
+}
+.summer-mode__simulator{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 20px;
+}
+.summer-mode__simulator-item{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+}

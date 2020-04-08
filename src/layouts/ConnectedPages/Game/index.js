@@ -8,9 +8,10 @@ import requireAuth from 'components/requireAuth';
 import Loading from 'components/Loading';
 import {GET_GAME_INFO, GET_USER_ID} from 'graphQL/queries';
 import {LEAVE_GAME} from 'graphQL/mutations';
-import {GAME_UPDATE, SUBMIT_UPDATE} from 'graphQL/subscriptions';
+import {GAME_UPDATE} from 'graphQL/subscriptions';
 import NothingToSee from 'components/NothingToSee';
 import OnGoingGame from './OnGoingGame';
+import SummerNight from 'components/SummerNight';
 
 
 const Game = (props)=>{
@@ -88,8 +89,11 @@ const Game = (props)=>{
     }
 
     return(
-        <div className="container">
-            {gameInfo && selectGameStatus(gameInfo)}
+        <div className="game-main">
+            <SummerNight/>
+            <div className="container game-main__container">
+                {gameInfo && selectGameStatus(gameInfo)}
+            </div>
         </div>
     )
 }

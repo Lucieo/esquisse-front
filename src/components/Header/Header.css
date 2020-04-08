@@ -6,3 +6,7 @@
     display: flex!important;
     flex-direction: row-reverse!important;
 }
+
+nav{
+    box-shadow: none;
+}

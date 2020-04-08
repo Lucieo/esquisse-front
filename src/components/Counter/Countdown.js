@@ -11,7 +11,7 @@ export default function Countdown({timer, submiter}){
         )
       };
     return(
-    <div style={{fontSize:"2rem"}}>
+    <div className="count-down">
         <Counter 
         date={Date.now() + timer} 
         renderer={counterAspect}

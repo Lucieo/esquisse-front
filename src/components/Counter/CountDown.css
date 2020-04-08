@@ -1,0 +1,19 @@
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: white;
+    z-index: 100;
+    border-bottom: 1px solid gray;
+    left: 0;
+    right: 0;
+  }
+
+.count-down{
+    font-size: 2rem;
+}
+
+.count-down p{
+    margin: 0;
+    padding: 10px;
+}

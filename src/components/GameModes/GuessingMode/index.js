@@ -44,13 +44,11 @@ const GuessingPanel = ({lastPage, finished, sketchbookId, gameId})=>{
                 hideInterface={true}
                 />
                 <p>Le mot deviné :</p>
-                <form>
-                    <input
-                        placeholder="Je vois je vois..."
-                        disabled={finished}
-                        onChange={e=>setContent(e.target.value)}
-                    />
-                </form>
+                <input
+                    placeholder="Je vois je vois..."
+                    disabled={finished}
+                    onChange={e=>setContent(e.target.value)}
+                />
           </div>
         )
 
