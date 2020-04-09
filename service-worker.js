@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/esquisse-front/precache-manifest.150962d6c3c2e2701f32bb20e66e90a3.js"
+  "/esquisse-front/precache-manifest.4f4e6819ba9e275c6d281525b47fdd96.js"
 );
 
 self.addEventListener('message', (event) => {
