@@ -27,10 +27,10 @@ const DrawingMode=({lastPage, finished, gameId, sketchbookId})=>{
         }
     });
 
-    window.onbeforeunload = function(){
-        console.log('LEAVING PAGE')
-        submitPage()
-    };
+    // window.onbeforeunload = function(){
+    //     console.log('LEAVING PAGE')
+    //     submitPage()
+    // };
 
     useEffect(() => {
         if(finished){

@@ -21,10 +21,10 @@ const GuessingPanel = ({lastPage, finished, sketchbookId, gameId})=>{
         }
     });
 
-    window.onbeforeunload = function(){
-        console.log('LEAVING PAGE')
-        submitPage()
-    };
+    // window.onbeforeunload = function(){
+    //     console.log('LEAVING PAGE')
+    //     submitPage()
+    // };
 
     useEffect(() => {
         if(finished){

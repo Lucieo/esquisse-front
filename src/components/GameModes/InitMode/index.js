@@ -26,10 +26,10 @@ const InitMode = ({finished, gameId, sketchbookId})=>{
     }, [finished]);
 
 
-    window.onbeforeunload = function(){
-        console.log('LEAVING PAGE')
-        submitPage()
-      };
+    // window.onbeforeunload = function(){
+    //     console.log('LEAVING PAGE')
+    //     submitPage()
+    //   };
 
     return(
         <>
