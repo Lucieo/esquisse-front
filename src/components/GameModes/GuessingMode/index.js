@@ -49,6 +49,7 @@ const GuessingPanel = ({lastPage, finished, sketchbookId, gameId})=>{
                     disabled={finished}
                     onChange={e=>setContent(e.target.value)}
                 />
+                <p>Votre réponse sera automatiquement envoyée à la fin du chrono!</p>
           </div>
         )
 

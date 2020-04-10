@@ -45,6 +45,7 @@ const InitMode = ({finished, gameId, sketchbookId})=>{
             onChange={e=>setContent(e.target.value)}
             disabled={finished}
             />
+            <p>Votre réponse sera automatiquement envoyée à la fin du chrono!</p>
         </>
     )
 }

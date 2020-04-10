@@ -54,6 +54,7 @@ const DrawingMode=({lastPage, finished, gameId, sketchbookId})=>{
                         <div className="center">
                             <p>LE MOT A DESSINER EST</p>
                             <h3>{lastPage.content}</h3>
+                            <p>Votre dessin sera automatiquement envoyé à la fin du chrono!</p>
                         </div>
                         <CanvasDraw
                             ref={canvasDraw => setContent(canvasDraw)}
@@ -63,7 +64,7 @@ const DrawingMode=({lastPage, finished, gameId, sketchbookId})=>{
                             className="drawing-mode__canvas"
                             disabled={finished}
                             hideGrid={finished}
-                            canvasWidth={500}
+                            canvasWidth={450}
                             canvasHeight={400}
                         />
                     </div>
