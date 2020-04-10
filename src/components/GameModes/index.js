@@ -7,8 +7,8 @@ import SubmitMode from 'components/GameModes/SubmitMode';
 
 const timers ={
     "init":60000,
-    "drawing":60000,
-    "guessing":60000,
+    "drawing":90000,
+    "guessing":30000,
     "loading":0
 }
 
