@@ -38,6 +38,7 @@ const InitMode = ({finished, gameId, sketchbookId})=>{
                 ?<p>Indiquez un mot pour commencer la partie</p>
                 : <p>Votre mot a été enregistré</p>
             }
+            <p>Votre réponse sera automatiquement envoyée à la fin du chrono!</p>
             <input
             placeholder="Mot Initial"
             type="text"
@@ -45,7 +46,6 @@ const InitMode = ({finished, gameId, sketchbookId})=>{
             onChange={e=>setContent(e.target.value)}
             disabled={finished}
             />
-            <p>Votre réponse sera automatiquement envoyée à la fin du chrono!</p>
         </>
     )
 }

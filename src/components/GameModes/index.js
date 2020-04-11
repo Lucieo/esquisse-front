@@ -12,9 +12,11 @@ const timers ={
     "loading":0
 }
 
+const test = undefined;
+
 export default function GameMode({pages, sketchbookId, turn}){
     const {gameId} = useParams();
-    const getGameMode = ()=>{
+    let getGameMode = ()=>{
         let mode = "loading";
         if(pages.length===0){
             mode = "init";
@@ -27,6 +29,7 @@ export default function GameMode({pages, sketchbookId, turn}){
         else{
             mode = "submitted"
         }
+        if(test) mode=test
         return mode
     }
 

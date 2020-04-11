@@ -44,12 +44,12 @@ const GuessingPanel = ({lastPage, finished, sketchbookId, gameId})=>{
                 hideInterface={true}
                 />
                 <p>Le mot deviné :</p>
+                <p>Votre réponse sera automatiquement envoyée à la fin du chrono!</p>
                 <input
                     placeholder="Je vois je vois..."
                     disabled={finished}
                     onChange={e=>setContent(e.target.value)}
                 />
-                <p>Votre réponse sera automatiquement envoyée à la fin du chrono!</p>
           </div>
         )
 

@@ -45,7 +45,7 @@ export default function LastGames(){
                         </div>
                     )
                 })
-                :<p>aucune partie disponible</p>
+                :<p>vous n'avez pas d'ancienne partie disponible</p>
             }
         </div>
     )

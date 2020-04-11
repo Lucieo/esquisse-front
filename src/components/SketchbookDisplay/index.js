@@ -30,6 +30,7 @@ export default function SketchbookDisplay({sketchbook}){
                                         loadTimeOffset={0}
                                         saveData={page.content}
                                         hideInterface={true}
+                                        immediateLoading={true}
                                     />
                                 </div>   
                                 )              

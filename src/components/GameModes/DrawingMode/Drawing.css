@@ -39,3 +39,11 @@ padding: 0px 10px;
     min-width: 20px;
     display: inline-block;
 }
+
+.circle-picker span:nth-child(22) div span div{
+    border: 1px solid lightgray;
+}
+
+.drawing-tools__brush-btn button{
+    margin: 10px;
+}

@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import CanvasDraw from "react-canvas-draw";
 import DrawingTools from './DrawingTools';
-import DeleteAll from './DeleteAll';
-import DeleteLastStroke from "./DeleteLastStroke";
 import applyCountdown from 'components/Counter/applyCountdown';
 import {SUBMIT_PAGE} from 'graphQL/mutations';
 import {useMutation} from '@apollo/react-hooks';
