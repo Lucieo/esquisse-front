@@ -6,7 +6,7 @@ export default function NothingToSee(){
     return(
         <div className="center">
             <h3>Rien à voir ici circulez!</h3>
-            <p>Cette partie a été abandonnée vous ne pouvez pas y accéder.</p>
+            <p>Cette partie n'est plus accessible, créez en une autre.</p>
             <div>
                 <img src={Wrong} alt="stop"/>
             </div>

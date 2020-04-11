@@ -19,10 +19,19 @@ const Game = (props)=>{
     const [gameInfo, setGameInfo] = useState({})
     const user = useQuery(GET_USER_ID).data
     const userId = user && user.userId
-    const [leaveGame] = useMutation(LEAVE_GAME, {variables:{gameId}, refetchQueries: [{
-        query: GET_GAME_INFO,
-        variables: {gameId}
-    }]})
+        const [leaveGame, test] = useMutation(LEAVE_GAME, 
+            {
+            variables:{gameId}, 
+            refetchQueries: [{
+            query: GET_GAME_INFO,
+            variables: {gameId},
+            }],
+            onError(...error){
+                console.log(error)
+            }
+    })
+
+    console.log(test)
 
 
     const { data, loading, error } = useQuery(
@@ -61,6 +70,7 @@ const Game = (props)=>{
     if(loading) return <Loading/>
 
     const selectGameStatus = ({status})=>{
+        console.log(status)
         if(status==="new"){
             return <NewGame 
             gameId={gameId} 
@@ -83,7 +93,7 @@ const Game = (props)=>{
             sketchbooks={gameInfo.sketchbooks}
             />
         }
-        else if(status=="abandonned"){
+        else{
             return <NothingToSee/>
         }
     }
