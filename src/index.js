@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import AuthPage from 'layouts/AuthPage';
 import ConnectedPages from 'layouts/ConnectedPages';
+import {
+  BrowserView,
+  MobileView
+} from "react-device-detect";
+import NoMobile from 'components/NoMobile';
 
 
 function IsLoggedIn() {
@@ -11,7 +16,14 @@ function IsLoggedIn() {
 
 const Root = () => {
   return (
-    <IsLoggedIn />
+    <>
+    <BrowserView>
+      <IsLoggedIn />
+    </BrowserView>
+    <MobileView>
+        <NoMobile/>
+    </MobileView>
+    </>
   );
 };
 
