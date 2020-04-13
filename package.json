@@ -36,7 +36,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "db:reset": "node cypress/scripts/db reset",
+    "db:seed": "node cypress/scripts/db seed"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -54,6 +56,10 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "chalk": "^4.0.0",
+    "cypress": "^4.3.0",
+    "eslint-plugin-cypress": "^2.10.3",
+    "gh-pages": "^2.2.0",
+    "mongodb": "^3.5.5"
   }
 }

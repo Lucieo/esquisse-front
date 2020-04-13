@@ -1,0 +1,12 @@
+{
+    "baseUrl": "http://localhost:3000",
+    "env": {
+        "server": "http://localhost:4000",
+        "user": {
+            "email": "user@example.com",
+            "password": "Passw0rd!",
+            "name": "user1234"
+        },
+        "mongoUri": "mongodb://localhost:27017"
+    }
+}

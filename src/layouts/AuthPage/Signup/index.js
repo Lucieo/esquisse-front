@@ -51,17 +51,20 @@ export default function SignUp(props){
             }}>
             <input
                 placeholder="nom"
+                name="username"
                 value={name}
                 onChange={(e)=>{checkForm(e.target.value, 'name', setName)}}
             />
             <input
                 placeholder="email"
                 type="email"
+                name="email"
                 value={email}
                 onChange={(e)=>{checkForm(e.target.value, 'email', setEmail)}}
             />
             <input
                 type="password"
+                name="password"
                 placeholder="mot de passe"
                 value={password}
                 onChange={(e)=>{checkForm(e.target.value, 'password', setPassword)}}
