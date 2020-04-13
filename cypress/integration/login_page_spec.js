@@ -5,7 +5,7 @@ describe('The Login Page', () => {
         cy.exec('npm run db:reset && npm run db:seed')
 
         // seed a user in the DB that we can control from our tests
-        cy.request('POST', `${Cypress.env('server')}/graphql`, {
+        cy.request('POST', `${Cypress.env('API_BASE_URL')}/graphql`, {
             operationName: 'SignUp',
             query: 'mutation SignUp($email: String!, $password: String!, $name: String!) {  signup(email: $email, password: $password, name: $name) {    email    name    __typename  }}',
             variables: user

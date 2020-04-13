@@ -1,12 +1,11 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
-const { env } = require('../../cypress')
 const chalk = require('chalk');
 
-const url = env.mongoUri;
+const url = process.env.MONGO_URI;
 
 // Database Name
-const dbName = 'test';
+const dbName = process.env.MONGO_DB || 'test';
 const command = process.argv[2];
 
 // Create a new MongoClient
