@@ -19,7 +19,7 @@ Cypress.Commands.add('login', (email = 'admin@example.com', password = 'Passw0rd
 Cypress.Commands.add('signup', (nom = 'user1234', email = 'user@example.com', password = 'Passw0rd!') => {
     cy.visit('/')
     cy.contains('S\'inscrire').click()
-    cy.get('[placeholder="nom"]').type(nom)
+    cy.get('[name="username"]').type(nom)
     cy.get('[name="email"]').type(email)
     cy.get('[name="password"]').type(password)
     cy.contains('S\'inscrire').click()
