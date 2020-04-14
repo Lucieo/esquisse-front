@@ -1,14 +1,14 @@
 let apiBaseUrl;
-const ssl = process.env.NODE_ENV === 'production';
 
 if (process.env.NODE_ENV === 'development') {
-    apiBaseUrl = 'localhost:4000/graphql'
+    apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'localhost:4000/graphql'
 } else if (process.env.NODE_ENV === 'test') {
-    apiBaseUrl = process.env.API_BASE_URL
+    apiBaseUrl = process.env.REACT_APP_API_BASE_URL
 } else {
-    apiBaseUrl = 'esquisse-api.herokuapp.com/graphql'
+    apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'esquisse-api.herokuapp.com/graphql'
 }
 
+const ssl = process.env.NODE_ENV === 'production' || apiBaseUrl.includes('heroku');
 const httpUri = `http${ssl ? 's' : ''}://${apiBaseUrl}`;
 const websocketUri = `ws${ssl ? 's' : ''}://${apiBaseUrl}`;
 

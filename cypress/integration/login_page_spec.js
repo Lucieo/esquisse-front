@@ -2,10 +2,12 @@
 describe('The Login Page', () => {
     const user = Cypress.env('user');
     beforeEach(() => {
-        cy.exec('npm run db:reset && npm run db:seed')
+        cy.exec(`MONGO_URI=${Cypress.env('MONGO_URI')} npm run db:reset`)
 
         // seed a user in the DB that we can control from our tests
-        cy.request('POST', `${Cypress.env('API_BASE_URL')}/graphql`, {
+        const apiBaseUrl = Cypress.env('API_BASE_URL');
+        const protocol = apiBaseUrl.includes('heroku') ? 'https' : 'http';
+        cy.request('POST', `${protocol}://${apiBaseUrl}`, {
             operationName: 'SignUp',
             query: 'mutation SignUp($email: String!, $password: String!, $name: String!) {  signup(email: $email, password: $password, name: $name) {    email    name    __typename  }}',
             variables: user
@@ -13,7 +15,7 @@ describe('The Login Page', () => {
 
     })
 
-    it('sets auth cookie when logging in via form submission', function () {
+    it('sets JWT when logging in via form submission', function () {
         cy.visit('/login')
 
         cy.get('input[name=email]').type(user.email)

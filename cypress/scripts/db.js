@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const url = process.env.MONGO_URI;
 
 // Database Name
-const dbName = process.env.MONGO_DB || 'test';
+const dbName = url.split('/').pop();
 const command = process.argv[2];
 
 // Create a new MongoClient
