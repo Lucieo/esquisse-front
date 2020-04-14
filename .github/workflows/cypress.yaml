@@ -10,9 +10,9 @@ jobs:
       - name: Cypress run with env
         uses: cypress-io/github-action@v1
         env:
-          CYPRESS_MONGO_URI: mongodb://heroku_1wcllx6h:drer4pnkrehugbn7hrvr11hlge@ds039404.mlab.com:39404/heroku_1wcllx6h
-          CYPRESS_API_BASE_URL: still-badlands-49750.herokuapp.com/graphql
-          REACT_APP_API_BASE_URL: still-badlands-49750.herokuapp.com/graphql
+          CYPRESS_MONGO_URI: ${{ secrets.CYPRESS_MONGO_URI }}
+          CYPRESS_API_BASE_URL: ${{ secrets.CYPRESS_API_BASE_URL }}
+          REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
         with:
           start: npm start
 
