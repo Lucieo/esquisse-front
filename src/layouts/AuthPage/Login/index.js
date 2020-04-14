@@ -63,6 +63,7 @@ export default function Login(props){
                 <input
                     placeholder="email"
                     type="email"
+                    name="email"
                     value={email}
                     onChange={(e)=>{
                         checkForm(e.target.value, setEmail);
@@ -71,6 +72,7 @@ export default function Login(props){
                 <input
                     type="password"
                     placeholder="password"
+                    name="password"
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}
                 />
