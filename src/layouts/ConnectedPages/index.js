@@ -18,27 +18,17 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/link-ws';
 import { resolvers, localType } from 'graphQL/localState';
 import PdfFormat from 'components/PdfFormat';
+import { httpUri, websocketUri } from 'configuration/api';
 
 const cache = new InMemoryCache();
 
-let apiBaseUrl;
-const ssl = process.env.NODE_ENV === 'prod';
-
-if (process.env.NODE_ENV === 'development') {
-    apiBaseUrl = 'localhost:4000/graphql'
-} else if (process.env.NODE_ENV === 'test') {
-    apiBaseUrl = process.env.API_BASE_URL
-} else {
-    apiBaseUrl = 'esquisse-api.herokuapp.com/graphql'
-}
-
 const httpLink = new HttpLink({
     headers: { authorization: localStorage.getItem('esquisse-token') },
-    uri: `http${ssl ? 's' : ''}://${apiBaseUrl}`
+    uri: httpUri
 });
 
 const wsLink = new WebSocketLink({
-    uri: `ws${ssl ? 's' : ''}://${apiBaseUrl}`,
+    uri: websocketUri,
     options: {
         reconnect: true
     }
