@@ -47,6 +47,13 @@ query GetGameInfo($gameId:ID!){
       sketchbooks{
         id
       }
+      configuration {
+          timers: {
+              init
+              drawing
+              guessing
+          }
+      }
     }
   }
 `
