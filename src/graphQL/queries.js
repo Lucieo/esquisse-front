@@ -48,7 +48,7 @@ query GetGameInfo($gameId:ID!){
         id
       }
       configuration {
-          timers: {
+          timers {
               init
               drawing
               guessing

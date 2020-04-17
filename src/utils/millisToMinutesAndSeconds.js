@@ -4,6 +4,9 @@ const millisToMinutesAndSeconds = (millis) => {
     if (!minutes) {
         return `${seconds} seconde${seconds > 1 ? 's' : ''}`;
     }
+    if (seconds < 1) {
+        return `${minutes}mn`;
+    }
     return `${minutes}mn${(seconds < 10 ? '0' : '') + seconds}`;
 }
 

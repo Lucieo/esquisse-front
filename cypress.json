@@ -1,5 +1,6 @@
 {
     "baseUrl": "http://localhost:3000",
+    "video": false,
     "env": {
         "API_BASE_URL": "localhost:4000/graphql",
         "user": {

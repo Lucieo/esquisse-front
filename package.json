@@ -39,7 +39,8 @@
     "deploy": "gh-pages -d build",
     "db:reset": "node cypress/scripts/db reset",
     "db:seed": "node cypress/scripts/db seed",
-    "cypress:open": "$(npm bin)/cypress open"
+    "cypress:open": "$(npm bin)/cypress open",
+    "test:e2e": "$(npm bin)/cypress run"
   },
   "eslintConfig": {
     "extends": "react-app"

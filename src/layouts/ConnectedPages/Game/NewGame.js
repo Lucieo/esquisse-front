@@ -45,11 +45,10 @@ const NewGame = ({ gameId, playerslist, creatorId, configuration }) => {
             <div className="row">
                 <div className="new-game__rules col m6 s12">
                     <p className="new-game__rules-title center">Comment ça marche?</p>
-                    <p>Une fois que la partie compte au minimum 3 joueurs, le game master peut lancer le jeu.  Vous disposez de :
-                </p>
-                    <p>- { millisToMinutesAndSeconds(configuration.timers.init) } au premier tour pour écrire le mot ou la phrase initiale dans le champ texte</p>
-                    <p>- { millisToMinutesAndSeconds(configuration.timers.drawing) } au tour suivant pour dessiner le mot qui vous sera donné</p>
-                    <p>- { millisToMinutesAndSeconds(configuration.timers.guessing) } au tour suivant pour mettre un mot sur le dessin proposé dans le champs texte</p>
+                    <p>Une fois que la partie compte au minimum 3 joueurs, le game master peut lancer le jeu.  Vous disposez de :</p>
+                    <p>- <span data-cy-id="init-time">{ millisToMinutesAndSeconds(configuration.timers.init) }</span> au premier tour pour écrire le mot ou la phrase initiale dans le champ texte</p>
+                    <p>- <span data-cy-id="drawing-time">{ millisToMinutesAndSeconds(configuration.timers.drawing) }</span> au tour suivant pour dessiner le mot qui vous sera donné</p>
+                    <p>- <span data-cy-id="guessing-time">{ millisToMinutesAndSeconds(configuration.timers.guessing) }</span> au tour suivant pour mettre un mot sur le dessin proposé dans le champs texte</p>
                     <p>La page se met à jour en sauvegardant votre réponse et le chronomètre se lance automatiquement à chaque tour. Vous n'avez rien à faire.</p>
                 </div>
                 <div className="col m6 s12 new-game__players">
