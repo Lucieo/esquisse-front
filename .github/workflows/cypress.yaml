@@ -1,0 +1,18 @@
+name: Cypress tests
+on: [push,pull_request]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Cypress run with env
+        uses: cypress-io/github-action@v1
+        env:
+          CYPRESS_MONGO_URI: ${{ secrets.CYPRESS_MONGO_URI }}
+          CYPRESS_API_BASE_URL: ${{ secrets.CYPRESS_API_BASE_URL }}
+          REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
+        with:
+          start: npm start
+

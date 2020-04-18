@@ -1,0 +1,12 @@
+{
+    "baseUrl": "http://localhost:3000",
+    "env": {
+        "API_BASE_URL": "localhost:4000/graphql",
+        "user": {
+            "email": "user@example.com",
+            "password": "Passw0rd!",
+            "name": "user1234"
+        },
+        "MONGO_URI": "mongodb://localhost:27017/test"
+    }
+}

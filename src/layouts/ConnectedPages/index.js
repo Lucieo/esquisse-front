@@ -16,74 +16,75 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { split, HttpLink } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/link-ws';
-import {resolvers, localType} from 'graphQL/localState';
+import { resolvers, localType } from 'graphQL/localState';
 import PdfFormat from 'components/PdfFormat';
+import { httpUri, websocketUri } from 'configuration/api';
 
 const cache = new InMemoryCache();
 
 const httpLink = new HttpLink({
-  headers: { authorization: localStorage.getItem('esquisse-token') },
-  uri: process.env.REACT_APP_API_URL
+    headers: { authorization: localStorage.getItem('esquisse-token') },
+    uri: httpUri
 });
 
 const wsLink = new WebSocketLink({
-  uri: process.env.REACT_APP_WS_API_URL,
-  options: {
-    reconnect: true
-  }
+    uri: websocketUri,
+    options: {
+        reconnect: true
+    }
 });
 
 const link = split(
-  ({ query }) => {
-    const definition = getMainDefinition(query);
-    return (
-      definition.kind === 'OperationDefinition' &&
-      definition.operation === 'subscription'
-    );
-  },
-  wsLink,
-  httpLink,
+    ({ query }) => {
+        const definition = getMainDefinition(query);
+        return (
+            definition.kind === 'OperationDefinition' &&
+            definition.operation === 'subscription'
+        );
+    },
+    wsLink,
+    httpLink,
 );
 
 const client = new ApolloClient({
-  cache,
-  link,
-  credentials: 'include',
-  localType,  resolvers,
-  dataIdFromObject: o=>o.id
+    cache,
+    link,
+    credentials: 'include',
+    localType, resolvers,
+    dataIdFromObject: o => o.id
 });
 
 
 cache.writeData({
-  data: {
-    isLoggedIn: !!localStorage.getItem('esquisse-token'),
-  },
+    data: {
+        isLoggedIn: !!localStorage.getItem('esquisse-token'),
+    },
 });
 
-export default function ConnectedPaged(){
-    return(
+export default function ConnectedPaged() {
+    return (
         <ApolloProvider client={client}>
             <HashRouter>
-              <ConnectedPageContainer>
-                  <Switch>
-                      <Route path="/" exact>
-                          <Home/> 
-                      </Route>
-                      <Route path="/profile">
-                          <Profile/> 
-                      </Route>
-                      <Route 
-                        path="/game/:gameId"
-                      >
-                          <Game/>
-                      </Route>
-                      <Route 
-                        path="/pdf/:gameId"
-                      >
-                          <PdfFormat/>
-                      </Route>
-                  </Switch>
-              </ConnectedPageContainer>
+                <ConnectedPageContainer>
+                    <Switch>
+                        <Route path="/" exact>
+                            <Home />
+                        </Route>
+                        <Route path="/profile">
+                            <Profile />
+                        </Route>
+                        <Route
+                            path="/game/:gameId"
+                        >
+                            <Game />
+                        </Route>
+                        <Route
+                            path="/pdf/:gameId"
+                        >
+                            <PdfFormat />
+                        </Route>
+                    </Switch>
+                </ConnectedPageContainer>
             </HashRouter>
         </ApolloProvider>
     )
