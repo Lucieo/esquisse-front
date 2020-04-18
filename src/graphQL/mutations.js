@@ -11,8 +11,8 @@ mutation SignUp($email: String!, $password: String!, $name: String!){
 `;
 
 export const MODIFY_USER = gql`
-mutation ModifyUser($icon: String!, $name: String!){
-    modifyUser(name: $name, icon: $icon){
+mutation ModifyUser($icon: String!, $name: String!, $iconColor: String!){
+    modifyUser(name: $name, icon: $icon, iconColor:$iconColor){
         icon,
         name
     }
