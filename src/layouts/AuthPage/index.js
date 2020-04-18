@@ -13,7 +13,7 @@ import { ApolloProvider } from "react-apollo";
 import { httpUri } from 'configuration/api';
 
 const cache = new InMemoryCache();
-const link = new HttpLink({
+const link = new HttpLink({ 
  uri: httpUri
 });
 

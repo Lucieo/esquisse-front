@@ -5,9 +5,11 @@ import AuthPage from 'layouts/AuthPage';
 import ConnectedPages from 'layouts/ConnectedPages';
 import {
   BrowserView,
-  MobileView
+  MobileView,
+  isIE
 } from "react-device-detect";
 import NoMobile from 'components/NoMobile';
+import NoInternetExplorer from 'components/NoInternetExplorer'
 
 
 function IsLoggedIn() {
@@ -15,15 +17,16 @@ function IsLoggedIn() {
 }
 
 const Root = () => {
+  if(isIE) return  <NoInternetExplorer/>
   return (
-    <>
-    <BrowserView>
-      <IsLoggedIn />
-    </BrowserView>
-    <MobileView>
-        <NoMobile/>
-    </MobileView>
-    </>
+      <>
+        <BrowserView>
+          <IsLoggedIn />
+        </BrowserView>
+        <MobileView>
+            <NoMobile/>
+        </MobileView>
+      </>
   );
 };
 
