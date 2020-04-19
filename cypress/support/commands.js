@@ -16,13 +16,28 @@ Cypress.Commands.add('login', (email = 'admin@example.com', password = 'Passw0rd
     cy.contains('Valider').click()
 })
 
-Cypress.Commands.add('signup', (nom = 'user1234', email = 'user@example.com', password = 'Passw0rd!') => {
-    cy.visit('/')
-    cy.contains('S\'inscrire').click()
-    cy.get('[name="username"]').type(nom)
-    cy.get('[name="email"]').type(email)
-    cy.get('[name="password"]').type(password)
-    cy.contains('S\'inscrire').click()
+Cypress.Commands.add('signup', (name = 'user1234', email = 'user@example.com', password = 'Passw0rd!') => {
+    // cy.visit('/')
+    // cy.contains('S\'inscrire').click()
+    // cy.get('[name="username"]').type(nom)
+    // cy.get('[name="email"]').type(email)
+    // cy.get('[name="password"]').type(password)
+    // cy.contains('S\'inscrire').click()
+
+    cy.exec(`MONGO_URI=${Cypress.env('MONGO_URI')} npm run db:reset`)
+
+    // seed a user in the DB that we can control from our tests
+    const apiBaseUrl = Cypress.env('API_BASE_URL');
+    const protocol = apiBaseUrl.includes('heroku') ? 'https' : 'http';
+    cy.request('POST', `${protocol}://${apiBaseUrl}`, {
+        operationName: 'SignUp',
+        query: 'mutation SignUp($email: String!, $password: String!, $name: String!) {  signup(email: $email, password: $password, name: $name) {    email    name    __typename  }}',
+        variables: {
+            name,
+            email,
+            password
+        }
+    })
 })
 //
 //

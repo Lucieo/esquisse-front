@@ -36,7 +36,7 @@ mutation LeaveGame($gameId: ID!){
 `;
 
 export const SUBMIT_PAGE = gql`
-mutation SubmitPage($sketchbookId: ID!, $gameId: ID!, $content: String!, $pageType: String!){
+mutation SubmitPage($sketchbookId: ID!, $gameId: ID!, $content: String!, $pageType: PageType!){
     submitPage(sketchbookId: $sketchbookId, gameId: $gameId, content: $content, pageType: $pageType){
         id
     }
@@ -44,7 +44,7 @@ mutation SubmitPage($sketchbookId: ID!, $gameId: ID!, $content: String!, $pageTy
 `;
 
 export const CHANGE_GAME_STATUS = gql`
-mutation ChangeGameStatus($newStatus:String!, $gameId: ID!){
+mutation ChangeGameStatus($newStatus:GameStatus!, $gameId: ID!){
     changeGameStatus(gameId:$gameId, newStatus:$newStatus){
       status
       id
