@@ -54,7 +54,10 @@ const Game = (props) => {
                 "GAME UPDATED SUBSCRIPTION RECEIVED ",
                 subscriptionData.data.gameUpdate
             );
-            window.location.reload();
+            setGameInfo({
+                ...gameInfo,
+                ...subscriptionData.data.gameUpdate,
+            });
         },
         fetchPolicy: "network-only",
         onError(...error) {
