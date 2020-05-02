@@ -49,6 +49,7 @@ const Game = (props) => {
             console.log("GAME UPDATED INFO ", subscriptionData.data.gameUpdate);
             setGameInfo({ ...gameInfo, ...subscriptionData.data.gameUpdate });
         },
+        fetchPolicy: "network-only",
         onError(...error) {
             console.log(error);
         },
