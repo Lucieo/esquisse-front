@@ -54,14 +54,7 @@ const Game = (props) => {
                 "GAME UPDATED SUBSCRIPTION RECEIVED ",
                 subscriptionData.data.gameUpdate
             );
-            if (gameInfo.status === "new" && data.status === "active") {
-                window.location.reload();
-            } else {
-                setGameInfo({
-                    ...gameInfo,
-                    ...subscriptionData.data.gameUpdate,
-                });
-            }
+            window.location.reload();
         },
         fetchPolicy: "network-only",
         onError(...error) {
