@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 export const GAME_UPDATE = gql`
     subscription GameUpdate($gameId: ID!) {
         gameUpdate(gameId: $gameId) {
+            id
             status
             creator
             turn
