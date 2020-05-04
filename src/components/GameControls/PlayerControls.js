@@ -16,7 +16,13 @@ export default function PlayerControls({
                             esquissé, cliquez sur le bouton ci dessous pour
                             rejoindre les participants :
                         </p>
-                        <button onClick={() => joinGame()} className="btn">
+                        <button
+                            onClick={() => joinGame()}
+                            className={`btn ${loading && "disabled"}`}
+                        >
+                            {loading && (
+                                <i className="material-icons">access_time</i>
+                            )}
                             REJOINDRE LA PARTIE
                         </button>
                     </div>

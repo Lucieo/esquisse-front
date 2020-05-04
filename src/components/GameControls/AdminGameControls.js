@@ -9,6 +9,7 @@ export default function AdminGameControls({ gameId, players }) {
         variables: { gameId, newStatus: "active" },
     });
     const [copied, setCopied] = useState(false);
+    const minPlayers = process.env.REACT_APP_MODE === "TEST" ? 0 : 2;
     if (loading) return <div></div>;
     return (
         <>
@@ -33,7 +34,7 @@ export default function AdminGameControls({ gameId, players }) {
                     </CopyToClipboard>
                 </div>
                 <div>
-                    {players.length > 2 ? (
+                    {players.length > 0 ? (
                         <>
                             <p>Prêts à commencer?</p>
                             <button

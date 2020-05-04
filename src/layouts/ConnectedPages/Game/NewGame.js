@@ -18,7 +18,6 @@ const NewGame = ({ gameId, playerslist, creatorId }) => {
     const [joinGame, { loading, error }] = useMutation(JOIN_GAME, {
         variables: { gameId },
     });
-    const [leaveGame] = useMutation(LEAVE_GAME, { variables: { gameId } });
     const { data, loadingSub } = useSubscription(PLAYER_UPDATE_SUBSCRIPTION, {
         variables: { gameId },
         onSubscriptionData: ({ client, subscriptionData }) => {

@@ -64,7 +64,7 @@ export const CHANGE_GAME_STATUS = gql`
 export const DEBUG_GAME = gql`
     mutation DebugGame($gameId: ID!) {
         debugGame(gameId: $gameId) {
-            gameId
+            id
         }
     }
 `;

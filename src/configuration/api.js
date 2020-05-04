@@ -2,7 +2,13 @@ let apiBaseUrl;
 
 if (process.env.NODE_ENV === "development") {
     apiBaseUrl = process.env.REACT_APP_API_BASE_URL || "localhost:4000/graphql";
-} else if (process.env.NODE_ENV === "test") {
+}
+// if (process.env.NODE_ENV === "development") {
+//     apiBaseUrl =
+//         process.env.REACT_APP_API_BASE_URL ||
+//         "esquisse-api.herokuapp.com/graphql";
+// }
+else if (process.env.NODE_ENV === "test") {
     apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 } else {
     apiBaseUrl =

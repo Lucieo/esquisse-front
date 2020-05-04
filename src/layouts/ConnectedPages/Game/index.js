@@ -45,21 +45,18 @@ const Game = (props) => {
 
     const gameUpdateSubscription = useSubscription(GAME_UPDATE, {
         variables: { gameId },
-        onConnected: () => {
-            console.log("CONNECTED");
-        },
         onSubscriptionData: ({ client, subscriptionData }) => {
             const data = subscriptionData.data.gameUpdate;
-            console.log(
-                "GAME UPDATED SUBSCRIPTION RECEIVED ",
-                subscriptionData.data.gameUpdate
-            );
-            setGameInfo({
-                ...gameInfo,
-                ...subscriptionData.data.gameUpdate,
-            });
+            console.log("GAME UPDATED SUBSCRIPTION RECEIVED ", data);
+            if (gameInfo.status === "new") {
+                window.location.reload();
+            } else {
+                setGameInfo({
+                    ...gameInfo,
+                    ...data,
+                });
+            }
         },
-        fetchPolicy: "network-only",
         onError(...error) {
             console.log(error);
         },
@@ -72,11 +69,9 @@ const Game = (props) => {
         };
     }, []);
 
-    console.log(gameUpdateSubscription);
     if (loading) return <Loading />;
 
     const selectGameStatus = ({ status }) => {
-        console.log(status);
         if (status === "new") {
             return (
                 <NewGame

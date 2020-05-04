@@ -7,18 +7,22 @@ export default function Countdown({ timer, submiter, setTime }) {
             <p>
                 <i className="material-icons small">access_alarm</i>
                 <span>
-                    {hours}:{minutes}:{seconds}
+                    {minutes}:{seconds}
                 </span>
             </p>
         );
     };
     return (
-        <div className="count-down">
-            <Counter
-                date={setTime + timer}
-                renderer={counterAspect}
-                onComplete={() => submiter()}
-            />
-        </div>
+        <>
+            {setTime && (
+                <div className="count-down">
+                    <Counter
+                        date={setTime}
+                        renderer={counterAspect}
+                        onComplete={() => submiter()}
+                    />
+                </div>
+            )}
+        </>
     );
 }

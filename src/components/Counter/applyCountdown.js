@@ -8,7 +8,6 @@ import "./CountDown.css";
 
 const applyCountdown = (WrappedComponent) => {
     const HOC = (props) => {
-        console.log("APPLY COUNTDOWN SET TIME IS", props.setTime);
         const { gameId } = useParams();
         const [finished, setFinished] = useState(false);
         const [submit, setSubmit] = useState(false);
@@ -39,7 +38,6 @@ const applyCountdown = (WrappedComponent) => {
         const renderCounter = () => {
             return !finished && !submit ? (
                 <Countdown
-                    timer={props.timer}
                     setTime={props.setTime}
                     submiter={() => setFinished(true)}
                 />

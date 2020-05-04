@@ -6,7 +6,14 @@ import { useMutation } from "@apollo/react-hooks";
 
 import "./GuessingMode.css";
 
-const GuessingPanel = ({ lastPage, finished, sketchbookId, gameId }) => {
+const GuessingPanel = ({
+    lastPage,
+    finished,
+    sketchbookId,
+    gameId,
+    isGameMaster,
+    turn,
+}) => {
     const [content, setContent] = useState("");
     const pageType = "guessing";
     const [submitPage, { loading, error }] = useMutation(SUBMIT_PAGE, {
@@ -28,7 +35,21 @@ const GuessingPanel = ({ lastPage, finished, sketchbookId, gameId }) => {
 
     useEffect(() => {
         if (finished) {
-            submitPage();
+            if (process.env.REACT_APP_MODE === "TEST") {
+                if (!isGameMaster) {
+                    console.log("NOT GAME MASTER SUBMIT PAGE");
+                    submitPage();
+                } else {
+                    if (turn < 3) {
+                        console.log("GAME MASTER SUBMITTED ");
+                        submitPage();
+                    } else {
+                        console.log("WILL NOT SUBMIT GAMEMASTER + turn is 3");
+                    }
+                }
+            } else {
+                submitPage();
+            }
         }
     }, [finished]);
 

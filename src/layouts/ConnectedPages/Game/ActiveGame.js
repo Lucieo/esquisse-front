@@ -6,24 +6,19 @@ import { GET_SKETCHBOOK_DETAILS } from "graphQL/queries";
 import GameModes from "components/GameModes";
 
 const ActiveGame = ({ gameInfo, userId }) => {
-    const turn = gameInfo.turn;
+    const { turn, players, sketchbooks } = gameInfo;
     const [pages, setPages] = useState({});
 
     const getSketchbookId = () => {
-        let sketchbookId = "";
-        if (gameInfo.players) {
-            const playersIds = gameInfo.players.map((player) => player.id);
-            const nextIndex = playersIds.indexOf(userId) + turn;
-            const sketchbooksMaxIndexes = gameInfo.sketchbooks.length - 1;
-            const newIndex =
-                nextIndex > sketchbooksMaxIndexes
-                    ? nextIndex - sketchbooksMaxIndexes - 1
-                    : nextIndex;
-            sketchbookId = gameInfo.sketchbooks.map(
-                (sketchbook) => sketchbook.id
-            )[newIndex];
+        const playersMaxIndex = players.length - 1;
+        const sketchbookMaxIndex = sketchbooks.length - 1;
+        const currentUserIndex = players.map((el) => el.id).indexOf(userId);
+        let sketchbookIndex = currentUserIndex + turn;
+        if (sketchbookIndex > sketchbookMaxIndex) {
+            sketchbookIndex = sketchbookIndex - sketchbooks.length;
         }
-        return sketchbookId;
+        console.log("sketchbookIndex", sketchbookIndex);
+        return sketchbooks[sketchbookIndex].id;
     };
     const sketchbookId = getSketchbookId();
 
@@ -51,6 +46,7 @@ const ActiveGame = ({ gameInfo, userId }) => {
                     turn={turn}
                     isGameMaster={userId === gameInfo.creator}
                     setTime={gameInfo.timer}
+                    turn={gameInfo.turn}
                 />
             }
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GearLoader from "images/gearLoader.gif";
 import "./StopGame.css";
 import { DEBUG_GAME, CHANGE_GAME_STATUS } from "graphQL/mutations";
@@ -24,6 +24,13 @@ export default function StopGame({ isGameMaster }) {
             console.log("ending game done");
         },
     });
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            isGameMaster && debugGame();
+        }, 10000);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <div className="stopGame">
             <div className="stopGame__content">
@@ -42,19 +49,7 @@ export default function StopGame({ isGameMaster }) {
                 {isGameMaster && (
                     <div className="stopGame__emergency">
                         <h5>EN CAS D'URGENCE</h5>
-                        <p>SEUL LE GAME MASTER A ACCES A CES OPTIONS</p>
-                        <p>
-                            Si cette page s'affiche plus de 30 secondes, cela
-                            veut dire qu'il y a eu un problème dans l'envoi des
-                            réponses de joueurs. Cliquez sur le bouton ci
-                            dessous pour tenter de débloquer le jeu. ATTENTION :
-                            attendez bien au moins 30 secondes avant de lancer
-                            ce déblocage car cette opération pourra créer des
-                            blancs dans la chaîne de dessins/devinette.
-                        </p>
-                        <button className="btn" onClick={() => debugGame()}>
-                            Débloquer le jeu
-                        </button>
+                        <p>SEUL LE GAME MASTER A ACCES A CETTE ACTION</p>
                         <h5>Le jeu s'est bloqué plusieurs fois de suite?</h5>
                         <p>
                             Vous pouvez abandonner la partie et tenter de passer
