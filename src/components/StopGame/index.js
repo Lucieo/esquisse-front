@@ -1,20 +1,13 @@
 import React, { useEffect } from "react";
 import GearLoader from "images/gearLoader.gif";
 import "./StopGame.css";
-import { DEBUG_GAME, CHANGE_GAME_STATUS } from "graphQL/mutations";
+import { CHANGE_GAME_STATUS } from "graphQL/mutations";
 import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/react-hooks";
+import Countdown from "components/Counter/Countdown";
 
 export default function StopGame({ isGameMaster }) {
     const { gameId } = useParams();
-    const [debugGame] = useMutation(DEBUG_GAME, {
-        variables: {
-            gameId,
-        },
-        onCompleted: () => {
-            console.log("debug done");
-        },
-    });
     const [endGame] = useMutation(CHANGE_GAME_STATUS, {
         variables: {
             gameId,
@@ -24,16 +17,17 @@ export default function StopGame({ isGameMaster }) {
             console.log("ending game done");
         },
     });
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            isGameMaster && debugGame();
-        }, 10000);
-        return () => clearTimeout(timer);
-    }, []);
+    const getTimer = () => {
+        const timer = new Date();
+        timer.setSeconds(timer.getSeconds() + 5);
+        return timer;
+    };
 
+    const setTime = getTimer();
     return (
         <div className="stopGame">
             <div className="stopGame__content">
+                <Countdown setTime={setTime} />
                 <h4>HAUT LES MAINS</h4>
                 <p>
                     Le timer est écoulé votre réponse a été envoyée. Ne touchez
@@ -50,7 +44,7 @@ export default function StopGame({ isGameMaster }) {
                     <div className="stopGame__emergency">
                         <h5>EN CAS D'URGENCE</h5>
                         <p>SEUL LE GAME MASTER A ACCES A CETTE ACTION</p>
-                        <h5>Le jeu s'est bloqué plusieurs fois de suite?</h5>
+                        <h5>Le jeu s'est bloqué?</h5>
                         <p>
                             Vous pouvez abandonner la partie et tenter de passer
                             directement aux résultats en cliquant sur le bouton

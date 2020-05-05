@@ -3,23 +3,15 @@ import applyCountdown from "components/Counter/applyCountdown";
 import { useMutation } from "@apollo/react-hooks";
 import { SUBMIT_PAGE } from "graphQL/mutations";
 
-const InitMode = ({ finished, gameId, sketchbookId }) => {
-    const pageType = "init";
+const InitMode = ({ finished, pageId }) => {
     const [content, setContent] = useState("");
     const [submitPage, { loading, error }] = useMutation(SUBMIT_PAGE, {
         variables: {
             content,
-            pageType,
-            gameId,
-            sketchbookId,
+            pageId,
         },
         onCompleted: () => {
-            console.log(
-                "PAGE SUBMITTED FOR SKETCHBOOK",
-                sketchbookId,
-                "with content ",
-                content
-            );
+            console.log("PAGE SUBMITTED ", pageId, "with content ", content);
         },
     });
 

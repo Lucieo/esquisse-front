@@ -7,27 +7,26 @@ import GameModes from "components/GameModes";
 
 const ActiveGame = ({ gameInfo, userId }) => {
     const { turn, players, sketchbooks } = gameInfo;
-    const [pages, setPages] = useState({});
+    const [pages, setPages] = useState();
 
     const getSketchbookId = () => {
-        const playersMaxIndex = players.length - 1;
         const sketchbookMaxIndex = sketchbooks.length - 1;
         const currentUserIndex = players.map((el) => el.id).indexOf(userId);
         let sketchbookIndex = currentUserIndex + turn;
         if (sketchbookIndex > sketchbookMaxIndex) {
             sketchbookIndex = sketchbookIndex - sketchbooks.length;
         }
-        console.log("sketchbookIndex", sketchbookIndex);
         return sketchbooks[sketchbookIndex].id;
     };
     const sketchbookId = getSketchbookId();
 
-    const { data, loading, error } = useQuery(GET_SKETCHBOOK_DETAILS, {
+    const { data, loading } = useQuery(GET_SKETCHBOOK_DETAILS, {
         variables: {
             sketchbookId,
         },
         fetchPolicy: "network-only",
         onCompleted({ getSketchbookInfo }) {
+            console.log("GETTING SKETCHBOOK", getSketchbookInfo);
             setPages(getSketchbookInfo.pages);
         },
         onError(...error) {
@@ -36,10 +35,11 @@ const ActiveGame = ({ gameInfo, userId }) => {
     });
 
     if (loading) return <Loading />;
+    console.log("isGameMaster", userId === gameInfo.creator);
 
     return (
         <div className="active-game">
-            {
+            {pages && (
                 <GameModes
                     pages={pages}
                     sketchbookId={sketchbookId}
@@ -48,7 +48,7 @@ const ActiveGame = ({ gameInfo, userId }) => {
                     setTime={gameInfo.timer}
                     turn={gameInfo.turn}
                 />
-            }
+            )}
         </div>
     );
 };

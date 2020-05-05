@@ -6,53 +6,23 @@ import { SUBMIT_PAGE } from "graphQL/mutations";
 import { useMutation } from "@apollo/react-hooks";
 import "./Drawing.css";
 
-const DrawingMode = ({
-    lastPage,
-    finished,
-    gameId,
-    sketchbookId,
-    isGameMaster,
-    turn,
-}) => {
+const DrawingMode = ({ lastPage, finished, pageId }) => {
     const [brushColor, setBrushColor] = useState("#000000");
     const [brushRadius, setBrushRadius] = useState(2);
     const [content, setContent] = useState("");
-
-    const pageType = "drawing";
     const [submitPage, { loading, error }] = useMutation(SUBMIT_PAGE, {
         variables: {
             content: content && content.getSaveData(),
-            pageType,
-            gameId,
-            sketchbookId,
+            pageId,
         },
         onCompleted: () => {
-            console.log(
-                "PAGE SUBMITTED FOR SKETCHBOOK",
-                sketchbookId,
-                "with content ",
-                content
-            );
+            console.log("PAGE SUBMITTED ", pageId, "with content ", content);
         },
     });
 
     useEffect(() => {
         if (finished) {
-            if (process.env.REACT_APP_MODE === "TEST") {
-                if (!isGameMaster) {
-                    console.log("NOT GAME MASTER SUBMIT PAGE");
-                    submitPage();
-                } else {
-                    if (turn < 3) {
-                        console.log("GAME MASTER SUBMITTED ");
-                        submitPage();
-                    } else {
-                        console.log("WILL NOT SUBMIT GAMEMASTER + turn is 3");
-                    }
-                }
-            } else {
-                submitPage();
-            }
+            submitPage();
         }
     }, [finished]);
 

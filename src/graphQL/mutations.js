@@ -35,18 +35,8 @@ export const LEAVE_GAME = gql`
 `;
 
 export const SUBMIT_PAGE = gql`
-    mutation SubmitPage(
-        $sketchbookId: ID!
-        $gameId: ID!
-        $content: String!
-        $pageType: String!
-    ) {
-        submitPage(
-            sketchbookId: $sketchbookId
-            gameId: $gameId
-            content: $content
-            pageType: $pageType
-        ) {
+    mutation SubmitPage($pageId: ID!, $content: String!) {
+        submitPage(pageId: $pageId, content: $content) {
             id
         }
     }

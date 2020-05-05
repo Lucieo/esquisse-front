@@ -34,7 +34,7 @@ export default function AdminGameControls({ gameId, players }) {
                     </CopyToClipboard>
                 </div>
                 <div>
-                    {players.length > 0 ? (
+                    {players.length > 2 ? (
                         <>
                             <p>Prêts à commencer?</p>
                             <button

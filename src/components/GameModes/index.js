@@ -7,38 +7,30 @@ import Loading from "components/Loading";
 
 const test = undefined;
 
-export default function GameMode({
-    pages,
-    sketchbookId,
-    turn,
-    isGameMaster,
-    setTime,
-}) {
-    const { gameId } = useParams();
-    let getGameMode = () => {
-        let mode = "loading";
-        if (pages.length === 0) {
-            mode = "init";
-        } else if (pages.length % 2 === 0) {
-            mode = "guessing";
-        } else if (pages.length % 2 !== 0) {
-            mode = "drawing";
+export default function GameMode({ pages, turn, isGameMaster, setTime }) {
+    const currentPageIndex =
+        turn > pages.length - 1 ? turn - pages.length : turn;
+    const currentPage = pages[currentPageIndex];
+
+    const getLastPage = (currentPage, currentPageIndex) => {
+        let lastPage = currentPageIndex > 0 && pages[currentPageIndex - 1];
+        if (lastPage.content === "" && currentPageIndex - 3 >= 0) {
+            lastPage = pages[currentPageIndex - 3];
         }
-        if (test) mode = test;
-        return mode;
+        return lastPage;
     };
 
-    const lastPage = pages.length > 0 ? pages[pages.length - 1] : {};
-    const gameMode = getGameMode();
+    const lastPage = getLastPage(currentPage, currentPageIndex);
+    console.log(isGameMaster, "isGameMaster");
     const gameProps = {
-        gameId,
         turn,
-        sketchbookId,
-        lastPage,
         isGameMaster,
         setTime,
+        pageId: currentPage.id,
+        lastPage,
     };
 
+    const gameMode = currentPage.pageType;
     const selectGameDisplay = () => {
         if (gameMode == "init") {
             return <InitMode {...gameProps} />;

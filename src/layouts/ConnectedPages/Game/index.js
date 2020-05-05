@@ -48,14 +48,10 @@ const Game = (props) => {
         onSubscriptionData: ({ client, subscriptionData }) => {
             const data = subscriptionData.data.gameUpdate;
             console.log("GAME UPDATED SUBSCRIPTION RECEIVED ", data);
-            if (gameInfo.status === "new") {
-                window.location.reload();
-            } else {
-                setGameInfo({
-                    ...gameInfo,
-                    ...data,
-                });
-            }
+            setGameInfo({
+                ...gameInfo,
+                ...data,
+            });
         },
         onError(...error) {
             console.log(error);

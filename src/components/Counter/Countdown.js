@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Counter from "react-countdown";
 
-export default function Countdown({ timer, submiter, setTime }) {
+export default function Countdown({ submiter, setTime }) {
     const counterAspect = ({ hours, minutes, seconds }) => {
         return (
             <p>
@@ -19,7 +19,7 @@ export default function Countdown({ timer, submiter, setTime }) {
                     <Counter
                         date={setTime}
                         renderer={counterAspect}
-                        onComplete={() => submiter()}
+                        onComplete={() => submiter && submiter()}
                     />
                 </div>
             )}
