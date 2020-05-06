@@ -47,7 +47,7 @@ const GameOver = ({ gameId }) => {
                                         setOpenedModal(true);
                                     }}
                                 >
-                                    {sketchbook.pages[0].creator.name} -{" "}
+                                    {sketchbook.pages[0].creator?.name} -{" "}
                                     {sketchbook.pages[0].content}
                                 </button>
                             </div>
