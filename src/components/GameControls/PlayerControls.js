@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function PlayerControls({
     joinGame,
@@ -7,30 +7,30 @@ export default function PlayerControls({
     loading,
     leaveGame,
 }) {
+    const [blocked, setBlocked] = useState(false);
     const displayMessage = () => {
         if (!hasJoined) {
-            if (!loading) {
-                return (
-                    <div className="center">
-                        <p>
-                            Vous avez été invité à jouer à une partie de
-                            esquissé, cliquez sur le bouton ci dessous pour
-                            rejoindre les participants :
-                        </p>
-                        <button
-                            onClick={() => joinGame()}
-                            className={`btn ${loading && "disabled"}`}
-                        >
-                            {loading && (
-                                <i className="material-icons">access_time</i>
-                            )}
-                            REJOINDRE LA PARTIE
-                        </button>
-                    </div>
-                );
-            } else {
-                return <p>Connexion en cours</p>;
-            }
+            return (
+                <div className="center">
+                    <p>
+                        Vous avez été invité à jouer à une partie de esquissé,
+                        cliquez sur le bouton ci dessous pour rejoindre les
+                        participants :
+                    </p>
+                    <button
+                        onClick={() => {
+                            setBlocked(true);
+                            joinGame();
+                        }}
+                        className={`btn ${(loading || blocked) && "disabled"}`}
+                    >
+                        {(loading || blocked) && (
+                            <i className="material-icons">access_time</i>
+                        )}
+                        REJOINDRE LA PARTIE
+                    </button>
+                </div>
+            );
         } else {
             if (players.length < 3) {
                 return (

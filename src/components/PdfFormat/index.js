@@ -17,7 +17,7 @@ export default function PdfFormat() {
         <div className="pdf-format center container">
             <h4>Une si belle partie!</h4>
             <h5>
-                avec la participation de{" "}
+                avec la participation de
                 {data &&
                     data.getAllSketchbooks.map((sketchbook, index) => (
                         <span key={index}> {sketchbook.creator?.name} </span>

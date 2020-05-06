@@ -10,13 +10,12 @@ const applyCountdown = (WrappedComponent) => {
     const HOC = (props) => {
         const { gameId } = useParams();
         const [finished, setFinished] = useState(false);
-        const [submit, setSubmit] = useState(false);
 
         const timeToSubmit = useSubscription(TIME_TO_SUBMIT, {
             variables: { gameId },
             onSubscriptionData: ({ client, subscriptionData }) => {
                 console.log("TIME TO SUBMIT");
-                setSubmit(true);
+                setFinished(true);
             },
         });
 
@@ -36,7 +35,7 @@ const applyCountdown = (WrappedComponent) => {
         }, []);
 
         const renderCounter = () => {
-            return !finished && !submit ? (
+            return !finished ? (
                 <Countdown
                     setTime={props.setTime}
                     submiter={() => setFinished(true)}
@@ -50,7 +49,7 @@ const applyCountdown = (WrappedComponent) => {
                 <div className="center" id="CountDown">
                     {renderCounter()}
                 </div>
-                <WrappedComponent {...props} finished={submit} />
+                <WrappedComponent {...props} finished={finished} />
             </>
         );
     };

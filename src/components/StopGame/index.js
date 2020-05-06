@@ -17,11 +17,24 @@ export default function StopGame({ isGameMaster }) {
             console.log("ending game done");
         },
     });
+
+    //5 seconds to wait before receiving update game call with new turn
     const getTimer = () => {
         const timer = new Date();
         timer.setSeconds(timer.getSeconds() + 5);
         return timer;
     };
+
+    useEffect(() => {
+        //in case update called has not been received reload in 8 seconds
+        const reloadInCase = setTimeout(() => {
+            window.location.reload();
+        }, 8000);
+        return function cleanup() {
+            console.log("CLEANING TIMEOUT");
+            clearTimeout(reloadInCase);
+        };
+    });
 
     const setTime = getTimer();
     return (

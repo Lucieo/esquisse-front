@@ -35,7 +35,6 @@ const ActiveGame = ({ gameInfo, userId }) => {
     });
 
     if (loading) return <Loading />;
-    console.log("isGameMaster", userId === gameInfo.creator);
 
     return (
         <div className="active-game">

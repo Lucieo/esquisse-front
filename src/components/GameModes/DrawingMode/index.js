@@ -22,7 +22,12 @@ const DrawingMode = ({ lastPage, finished, pageId }) => {
 
     useEffect(() => {
         if (finished) {
+            console.log("THIS IS THE END SUBMIT NOW");
             submitPage();
+            setTimeout(function () {
+                console.log("SUBMITTING AGAIN CAPORAL!");
+                submitPage();
+            }, 2000);
         }
     }, [finished]);
 

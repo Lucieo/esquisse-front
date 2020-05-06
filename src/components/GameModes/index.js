@@ -21,7 +21,6 @@ export default function GameMode({ pages, turn, isGameMaster, setTime }) {
     };
 
     const lastPage = getLastPage(currentPage, currentPageIndex);
-    console.log(isGameMaster, "isGameMaster");
     const gameProps = {
         turn,
         isGameMaster,
