@@ -58,13 +58,6 @@ const Game = (props) => {
         },
     });
 
-    useEffect(() => {
-        return function cleanup() {
-            console.log("LEAVING GAME!");
-            leaveGame();
-        };
-    }, []);
-
     if (loading) return <Loading />;
 
     const selectGameStatus = ({ status }) => {

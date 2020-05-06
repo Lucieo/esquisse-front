@@ -3,14 +3,18 @@ import "./SketchbookDisplay.css";
 import CanvasDraw from "react-canvas-draw";
 
 export default function SketchbookDisplay({ sketchbook }) {
-    const initialCreator = sketchbook.pages[0].creator.name;
+    const initialCreator = sketchbook.pages[0].creator?.name;
     const initialWord = sketchbook.pages[0].content;
     const restOfPages = sketchbook.pages.slice(1);
     return (
         <div>
             <div className="">
                 <h4>{initialWord}</h4>
-                <p>proposé par {initialCreator}</p>
+                {initialCreator ? (
+                    <p>proposé par {initialCreator}</p>
+                ) : (
+                    <p>proposé par {sketchbook.creator?.name}</p>
+                )}
             </div>
             <div className="">
                 {restOfPages.map((page, index) => {
