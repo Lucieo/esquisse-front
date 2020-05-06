@@ -27,6 +27,13 @@ const NewGame = ({ gameId, playerslist, creatorId }) => {
         },
     });
 
+    const [leaveGame] = useMutation(LEAVE_GAME, {
+        variables: { gameId },
+        onError(...error) {
+            console.log(error);
+        },
+    });
+
     const isGameAdmin = currentUser.id === creator;
     const hasJoined =
         players.map((player) => player.id).indexOf(currentUser.id) > -1;
@@ -49,11 +56,16 @@ const NewGame = ({ gameId, playerslist, creatorId }) => {
         <div className="new-game">
             <h4>Nouvelle partie</h4>
             {isGameAdmin && (
-                <AdminGameControls gameId={gameId} players={players} />
+                <AdminGameControls
+                    gameId={gameId}
+                    players={players}
+                    leaveGame={leaveGame}
+                />
             )}
             {!isGameAdmin && (
                 <PlayerControls
                     joinGame={joinGame}
+                    leaveGame={leaveGame}
                     loading={loading}
                     players={players}
                     hasJoined={hasJoined}

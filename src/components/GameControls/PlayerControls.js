@@ -5,6 +5,7 @@ export default function PlayerControls({
     hasJoined,
     players,
     loading,
+    leaveGame,
 }) {
     const displayMessage = () => {
         if (!hasJoined) {
@@ -48,6 +49,22 @@ export default function PlayerControls({
             }
         }
     };
+    const quitGame = () => {
+        if (hasJoined) {
+            return (
+                <div className="center">
+                    <button onClick={() => leaveGame()} className={`btn`}>
+                        QUITTER LA PARTIE
+                    </button>
+                </div>
+            );
+        }
+    };
 
-    return <div className="centered">{displayMessage()}</div>;
+    return (
+        <div className="centered">
+            {quitGame()}
+            {displayMessage()}
+        </div>
+    );
 }

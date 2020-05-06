@@ -3,11 +3,10 @@ import GameOver from "./GameOver";
 import NewGame from "./NewGame";
 import ActiveGame from "./ActiveGame";
 import { useParams } from "react-router-dom";
-import { useQuery, useSubscription, useMutation } from "@apollo/react-hooks";
+import { useQuery, useSubscription } from "@apollo/react-hooks";
 import requireAuth from "components/requireAuth";
 import Loading from "components/Loading";
 import { GET_GAME_INFO, GET_USER_ID } from "graphQL/queries";
-import { LEAVE_GAME } from "graphQL/mutations";
 import { GAME_UPDATE } from "graphQL/subscriptions";
 import NothingToSee from "components/NothingToSee";
 import OnGoingGame from "./OnGoingGame";
@@ -18,18 +17,6 @@ const Game = (props) => {
     const [gameInfo, setGameInfo] = useState({});
     const user = useQuery(GET_USER_ID).data;
     const userId = user && user.userId;
-    const [leaveGame] = useMutation(LEAVE_GAME, {
-        variables: { gameId },
-        refetchQueries: [
-            {
-                query: GET_GAME_INFO,
-                variables: { gameId },
-            },
-        ],
-        onError(...error) {
-            console.log(error);
-        },
-    });
 
     const { data, loading, error } = useQuery(GET_GAME_INFO, {
         variables: { gameId },

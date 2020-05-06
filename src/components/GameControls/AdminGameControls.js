@@ -4,7 +4,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./Controls.css";
 import { CHANGE_GAME_STATUS } from "graphQL/mutations";
 
-export default function AdminGameControls({ gameId, players }) {
+export default function AdminGameControls({ gameId, players, leaveGame }) {
     const [launchGame, { loading, error }] = useMutation(CHANGE_GAME_STATUS, {
         variables: { gameId, newStatus: "active" },
     });
@@ -19,6 +19,11 @@ export default function AdminGameControls({ gameId, players }) {
                         Votre partie a bien été créée. Invitez vos amis à la
                         rejoindre en partageant le lien ci-dessous.
                     </p>
+                    <div>
+                        <button onClick={() => leaveGame()} className={`btn`}>
+                            QUITTER LA PARTIE
+                        </button>
+                    </div>
                     <p>
                         LIEN A PARTAGER AVEC LES AUTRES JOUEURS (CLIQUEZ POUR
                         COPIER)
